@@ -179,36 +179,6 @@ html, body {
     50% { opacity: 0; }
 }
 
-/* Seção de habilidades com barras de progresso */
-.skills-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 80%;
-    margin: auto;
-}
-
-.skill {
-    width: 100%;
-    margin: 10px 0;
-}
-
-.progress-bar {
-    background: #444;
-    height: 10px;
-    width: 100%;
-    border-radius: 5px;
-    overflow: hidden;
-    margin-top: 5px;
-}
-
-.progress {
-    background: #00bcd4;
-    height: 100%;
-    width: 0;
-    transition: width 1s ease-in-out;
-}
-
 /* Estilizando os projetos em cards */
 .projects-container {
     display: flex;
@@ -254,8 +224,3 @@ html, body {
     background: white;
     color: black;
 }
-
-
-
-
-
