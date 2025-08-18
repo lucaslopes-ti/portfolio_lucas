@@ -28,35 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
     typeEffect();
 });
 
-// Animação das barras de progresso ao rolar a página
-window.addEventListener("scroll", function () {
-    const skills = document.querySelectorAll(".progress");
-
-    skills.forEach(skill => {
-        const position = skill.getBoundingClientRect().top;
-        const screenHeight = window.innerHeight;
-
-        if (position < screenHeight - 50) {
-            skill.style.width = skill.dataset.width;
-        }
-    });
-});
-
-// Efeito de fade-in ao rolar a página
-window.addEventListener("scroll", function () {
-    const elements = document.querySelectorAll(".fade-in, .project-card");
-
-    elements.forEach(element => {
-        const position = element.getBoundingClientRect().top;
-        const screenHeight = window.innerHeight;
-
-        if (position < screenHeight - 100) {
-            element.classList.add("visible");
-        }
-    });
-});
-
-// Efeito de fade-in ao rolar a página
+// Efeito de fade-in ao rolar a página para projetos
 window.addEventListener("scroll", function () {
     const elements = document.querySelectorAll(".fade-in, .project-card");
 
@@ -69,4 +41,3 @@ window.addEventListener("scroll", function () {
         }
     });
 });
-
