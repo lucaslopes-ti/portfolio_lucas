@@ -1206,3 +1206,164 @@ body {
         grid-template-columns: 1fr;
     }
 }
+
+/* Modern Skills Grid - No Progress Bars */
+.skills-modern-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+}
+
+.skill-tech-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
+}
+
+.skill-tech-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.skill-tech-card:hover::before {
+    left: 100%;
+}
+
+.skill-tech-card:hover {
+    transform: translateY(-10px) scale(1.05);
+    border-color: var(--primary-color);
+    box-shadow: 0 20px 60px rgba(0, 212, 255, 0.4);
+    background: linear-gradient(135deg, var(--bg-card) 0%, rgba(0, 212, 255, 0.05) 100%);
+}
+
+.skill-tech-card h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-top: 1rem;
+    color: var(--text-primary);
+    position: relative;
+    z-index: 1;
+}
+
+.tech-shape {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto;
+    position: relative;
+    transition: all 0.4s ease;
+}
+
+.skill-tech-card:hover .tech-shape {
+    transform: rotate(360deg) scale(1.2);
+}
+
+.tech-shape-1 {
+    background: var(--gradient-1);
+    border-radius: 15px;
+    transform: rotate(45deg);
+}
+
+.tech-shape-1::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+    width: 30px;
+    height: 30px;
+    background: var(--bg-card);
+    border-radius: 8px;
+}
+
+.tech-shape-2 {
+    background: var(--gradient-2);
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+}
+
+.tech-shape-3 {
+    background: var(--gradient-1);
+    border-radius: 50%;
+}
+
+.tech-shape-4 {
+    background: var(--gradient-2);
+    transform: rotate(45deg);
+    clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+}
+
+.tech-shape-5 {
+    background: var(--gradient-1);
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+}
+
+.tech-shape-6 {
+    background: var(--gradient-2);
+    border-radius: 50%;
+    position: relative;
+}
+
+.tech-shape-6::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 25px;
+    height: 25px;
+    background: var(--bg-card);
+    border-radius: 50%;
+}
+
+.tech-shape-7 {
+    background: var(--gradient-1);
+    transform: rotate(45deg);
+    border-radius: 12px;
+}
+
+.tech-shape-8 {
+    background: var(--gradient-2);
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+    transform: rotate(45deg);
+}
+
+/* Remove old skill bars */
+.skill-bar,
+.skill-progress {
+    display: none !important;
+}
+
+/* Ensure timeline is visible */
+.timeline-content h4 {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.timeline-content {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* Ensure projects are visible */
+.project-shape {
+    display: block !important;
+    opacity: 0.3 !important;
+}
+
+.project-card:hover .project-shape {
+    opacity: 0.5 !important;
+}
