@@ -3,173 +3,837 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lucas Lopes - Portfolio</title>
+    <title>Lucas Lopes - Engenheiro de Dados | Portfolio</title>
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
-
-    <nav class="navbar">
-        <ul>
-            <li><a href="#sobre">Sobre</a></li>
-            <li><a href="#habilidades">Habilidades</a></li>
-            <li><a href="#projetos">Projetos</a></li>
-            <li><a href="#contato">Contato</a></li>
-        </ul>
+    <!-- Background 3D Canvas -->
+    <canvas id="canvas3d"></canvas>
+    
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="logo-text">LL</span>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home" class="nav-link">Início</a></li>
+                <li><a href="#sobre" class="nav-link">Sobre</a></li>
+                <li><a href="#experiencia" class="nav-link">Experiência</a></li>
+                <li><a href="#habilidades" class="nav-link">Habilidades</a></li>
+                <li><a href="#projetos" class="nav-link">Projetos</a></li>
+                <li><a href="#contato" class="nav-link">Contato</a></li>
+            </ul>
+            <div class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
     </nav>
 
-
-    <header>
-        <h1 class="typing">Lucas Lopes</h1>
-        <p>Explorando minha jornada na tecnologia</p>
-    </header>
-
-    <section id="sobre" class="content fade-in">
-        <h2>Sobre Mim</h2>
-        <p>Sou formado em diversas áreas da tecnologia e ensino. Aqui está minha trajetória:</p>
-
-        <div class="timeline">
-            <div class="timeline-item">
-                <div class="timeline-content left">
-                    <h3>📖 Física</h3>
-                    <p>Universidade Federal de Uberlândia</p>
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="hero-content">
+            <div class="hero-text">
+                <div class="hero-badge">
+                    <div class="badge-dot"></div>
+                    <span>Engenheiro de Dados & Matemático</span>
+                </div>
+                <h1 class="hero-title">
+                    <span class="title-line">Olá, eu sou</span>
+                    <span class="title-name" id="typingText">Lucas Lopes</span>
+                </h1>
+                <p class="hero-description">
+                    Transformando dados em insights valiosos através de arquiteturas escaláveis, 
+                    pipelines eficientes e soluções inteligentes de engenharia de dados.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#projetos" class="btn btn-primary">
+                        <span>Ver Projetos</span>
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                    <a href="#contato" class="btn btn-secondary">
+                        <span>Entre em Contato</span>
+                    </a>
                 </div>
             </div>
-
-            <div class="timeline-item">
-                <div class="timeline-content right">
-                    <h3>📖 Matemática</h3>
-                    <p>UNIUBE</p>
+            <div class="hero-visual">
+                <div class="floating-card card-1">
+                    <div class="card-shape shape-1"></div>
+                    <div class="card-text">Data Pipelines</div>
                 </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="timeline-content right">
-                    <h3>🤖 Mestrado em IA</h3>
-                    <p>UFU</p>
+                <div class="floating-card card-2">
+                    <div class="card-shape shape-2"></div>
+                    <div class="card-text">Cloud Computing</div>
                 </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="timeline-content left">
-                    <h3>📊 Especialização em Ciência de Dados e Big Data</h3>
-                    <p>PUC MINAS</p>
-                </div>
-            </div>
-            
-            <div class="timeline-item">
-                <div class="timeline-content left">
-                    <h3>🛠️ Engenharia da Computação</h3>
-                    <p>UNIVESP</p>
+                <div class="floating-card card-3">
+                    <div class="card-shape shape-3"></div>
+                    <div class="card-text">ETL/ELT</div>
                 </div>
             </div>
         </div>
-
-
-        <h2>Trabalhos</h2>
-        <div class="timeline">
-            <div class="timeline-item">
-                <div class="timeline-content right">
-                    <h3>🏭 SENAI-MG</h3>
-                    <p>Instrutor de Programação</p>
-                </div>
+        <div class="scroll-indicator">
+            <div class="mouse">
+                <div class="wheel"></div>
             </div>
-
-            <div class="timeline-item">
-                <div class="timeline-content left">
-                    <h3>📚 SEE-MG</h3>
-                    <p>Professor de Matemática</p>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="timeline-content left">
-                    <h3>🏢 SESI</h3>
-                    <p>Assistente de Tecnologia</p>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="timeline-content right">
-                    <h3>💻 Compass.UOL</h3>
-                    <p>Engenheiro de Dados</p>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <section id="habilidades" class="content fade-in">
-        <h2>Habilidades</h2>
-        <div class="skills-container">
-            <div class="skill">
-                <p>💻 Desenvolvimento Web</p>
-            </div>
-            <div class="skill">
-                <p>📊 Data Science</p>
-            </div>
-            <div class="skill">
-                <p>🤖 Machine Learning</p>
-            </div>
-            <div class="skill">
-                <p>🎮 Desenvolvimento de Jogos - UNITY/GODOT</p>
-            </div>
-            <div class="skill">
-                <p>♟️ Estratégia e Xadrez</p>
+            <div class="arrow">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
         </div>
     </section>
 
-
-        <section id="projetos" class="content fade-in">
-        <h2>Projetos</h2>
-        <div class="projects-container">
-            <div class="project-card">
-                <h3>🤟 Exatas Libras</h3>
-                <p>Meu projeto de divulgação científica em Libras para áreas de exatas.</p>
-                <a href="https://github.com/Boltzmann0" target="_blank">🔗 Ver no GitHub</a>
+    <!-- About Section -->
+    <section id="sobre" class="section about-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-number">01</span>
+                <h2 class="section-title">Sobre Mim</h2>
+                <div class="section-line"></div>
             </div>
-            <div class="project-card">
-                <h3>🤖 Visão Computacional de Libras com IA</h3>
-                <p>Desenvolvimento de um sistema de visão computacional para reconhecimento de Libras, adaptado com IA.</p>
-                <a href="https://github.com/Boltzmann0" target="_blank">🔗 Ver no GitHub</a>
-            </div>
-            <div class="project-card">
-                <h3>📊 Análise de dados com Python</h3>
-                <p>Um projeto que analisa grandes volumes de dados utilizando Pandas e Matplotlib.</p>
-                <a href="https://github.com/lucaslopes-ti" target="_blank">🔗 Ver no GitHub</a>
-            </div>
-            <div class="project-card">
-                <h3>🤖 Machine Learning aplicado</h3>
-                <p>Modelos de machine learning aplicados para previsões e análises de dados.</p>
-                <a href="https://github.com/lucaslopes-ti" target="_blank">🔗 Ver no GitHub</a>
-            </div>
-            <div class="project-card">
-                <h3>🎮 Desenvolvimento de jogos 2D</h3>
-                <p>Jogos desenvolvidos utilizando a biblioteca Pygame.</p>
-                <a href="https://github.com/lucaslopes-ti" target="_blank">🔗 Ver no GitHub</a>
-            </div>
-            <div class="project-card">
-                <h3>♟️ Algoritmos para xadrez</h3>
-                <p>Implementação de IA para jogar xadrez, utilizando Minimax e Alpha-Beta Pruning.</p>
-                <a href="https://github.com/lucaslopes-ti" target="_blank">🔗 Ver no GitHub</a>
+            <div class="about-content">
+                <div class="about-text">
+                    <p class="about-intro">
+                        Engenheiro da Computação e Matemático com especialização em 
+                        <strong>Engenharia de Dados</strong>, apaixonado por transformar 
+                        dados brutos em soluções estratégicas.
+                    </p>
+                    <p>
+                        Com formação multidisciplinar em Física, Matemática, Mestrado em IA 
+                        e especialização em Ciência de Dados, atuo como Engenheiro de Dados 
+                        na Compass.UOL, desenvolvendo pipelines robustos e arquiteturas escaláveis.
+                    </p>
+                    <div class="about-stats">
+                        <div class="stat-item">
+                            <div class="stat-number" data-target="50">0</div>
+                            <div class="stat-label">Projetos</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" data-target="5">0</div>
+                            <div class="stat-label">Anos de Experiência</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" data-target="100">0</div>
+                            <div class="stat-label">Satisfação</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-timeline">
+                    <h3>Formação Acadêmica</h3>
+                    <div class="timeline">
+                        <div class="timeline-item" data-aos="fade-up">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <h4>🛠️ Engenharia da Computação</h4>
+                                <p class="timeline-place">UNIVESP</p>
+                                <span class="timeline-date">Em andamento</span>
+                            </div>
+                        </div>
+                        <div class="timeline-item" data-aos="fade-up">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <h4>📊 Especialização em Ciência de Dados e Big Data</h4>
+                                <p class="timeline-place">PUC MINAS</p>
+                                <span class="timeline-date">Concluído</span>
+                            </div>
+                        </div>
+                        <div class="timeline-item" data-aos="fade-up">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <h4>🤖 Mestrado em Inteligência Artificial</h4>
+                                <p class="timeline-place">UFU</p>
+                                <span class="timeline-date">Concluído</span>
+                            </div>
+                        </div>
+                        <div class="timeline-item" data-aos="fade-up">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <h4>📖 Matemática</h4>
+                                <p class="timeline-place">UNIUBE</p>
+                                <span class="timeline-date">Concluído</span>
+                            </div>
+                        </div>
+                        <div class="timeline-item" data-aos="fade-up">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <h4>📖 Física</h4>
+                                <p class="timeline-place">Universidade Federal de Uberlândia</p>
+                                <span class="timeline-date">Concluído</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-
-    <section id="contato" class="content fade-in">
-        <h2>Contato</h2>
-        <p>Me encontre nas redes sociais:</p>
-        <div class="social-links">
-            <a href="https://github.com/lucaslopes-ti" target="_blank">🐙 GitHub</a>
-            <a href="mailto:lucas.dalps@gmail.com">📧 Email</a>
+    <!-- Experience Section -->
+    <!-- Experience Section -->
+    <section id="experiencia" class="section experience-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-number">02</span>
+                <h2 class="section-title">Experiência Profissional</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="experience-grid">
+                <div class="experience-card" data-aos="fade-up">
+                    <div class="exp-header">
+                        <div class="exp-shape exp-shape-1"></div>
+                        <div class="exp-info">
+                            <h3>Instrutor de Jogos Digitais</h3>
+                            <p class="exp-company">SENAI-MG</p>
+                            <span class="exp-period">Atual</span>
+                        </div>
+                    </div>
+                    <p class="exp-description">
+                        Ensino de desenvolvimento de jogos digitais, preparando profissionais 
+                        para o mercado de tecnologia e game design utilizando Godot e Unity.
+                    </p>
+                    <div class="exp-tags">
+                        <span class="tag">Ensino</span>
+                        <span class="tag">Game Development</span>
+                        <span class="tag">Godot</span>
+                        <span class="tag">Unity</span>
+                    </div>
+                </div>
+                <div class="experience-card" data-aos="fade-up">
+                    <div class="exp-header">
+                        <div class="exp-shape exp-shape-2"></div>
+                        <div class="exp-info">
+                            <h3>Engenheiro de Dados AWS</h3>
+                            <p class="exp-company">Compass.UOL</p>
+                            <span class="exp-period">Anterior</span>
+                        </div>
+                    </div>
+                    <p class="exp-description">
+                        Desenvolvimento de pipelines de dados escaláveis na AWS, arquitetura de data lakes, 
+                        implementação de soluções ETL/ELT com AWS Glue, Athena, S3, Redshift e EMR.
+                    </p>
+                    <div class="exp-tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">AWS</span>
+                        <span class="tag">Glue</span>
+                        <span class="tag">Athena</span>
+                        <span class="tag">S3</span>
+                        <span class="tag">Redshift</span>
+                    </div>
+                </div>
+                <div class="experience-card" data-aos="fade-up">
+                    <div class="exp-header">
+                        <div class="exp-shape exp-shape-3"></div>
+                        <div class="exp-info">
+                            <h3>Professor de Matemática</h3>
+                            <p class="exp-company">SEE-MG</p>
+                            <span class="exp-period">Anterior</span>
+                        </div>
+                    </div>
+                    <p class="exp-description">
+                        Ensino de matemática com foco em aplicações práticas e desenvolvimento 
+                        do raciocínio lógico.
+                    </p>
+                    <div class="exp-tags">
+                        <span class="tag">Educação</span>
+                        <span class="tag">Matemática</span>
+                    </div>
+                </div>
+                <div class="experience-card" data-aos="fade-up">
+                    <div class="exp-header">
+                        <div class="exp-shape exp-shape-4"></div>
+                        <div class="exp-info">
+                            <h3>Técnico Help Desk</h3>
+                            <p class="exp-company">SESI</p>
+                            <span class="exp-period">Anterior</span>
+                        </div>
+                    </div>
+                    <p class="exp-description">
+                        Suporte técnico e desenvolvimento de soluções tecnológicas para 
+                        processos educacionais.
+                    </p>
+                    <div class="exp-tags">
+                        <span class="tag">Tecnologia</span>
+                        <span class="tag">Suporte</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
-    <footer>
-        <p>© 2025 Lucas Lopes - Todos os direitos reservados</p>
+    <!-- Skills Section -->
+    <section id="habilidades" class="section skills-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-number">03</span>
+                <h2 class="section-title">Habilidades & Tecnologias</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-category" data-aos="fade-up">
+                    <div class="category-header">
+                        <h3>Programação</h3>
+                        <div class="category-shape category-shape-1"></div>
+                    </div>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <span class="skill-name">Python</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="95"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">C#</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="85"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Java</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="80"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">C/C++</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="75"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-category" data-aos="fade-up">
+                    <div class="category-header">
+                        <h3>Desenvolvimento Web</h3>
+                        <div class="category-shape category-shape-2"></div>
+                    </div>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <span class="skill-name">HTML/CSS/JavaScript</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="90"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Angular</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="80"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">ASP.NET</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="85"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">WordPress</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="75"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-category" data-aos="fade-up">
+                    <div class="category-header">
+                        <h3>Engenharia de Dados AWS</h3>
+                        <div class="category-shape category-shape-3"></div>
+                    </div>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <span class="skill-name">AWS Glue</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="90"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">AWS Athena</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="85"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">S3 / Redshift</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="88"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">EMR</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="80"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-category" data-aos="fade-up">
+                    <div class="category-header">
+                        <h3>Data Tools</h3>
+                        <div class="category-shape category-shape-4"></div>
+                    </div>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <span class="skill-name">Pandas</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="95"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Matplotlib</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="90"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Power BI</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="85"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">AWS QuickSight</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="80"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-category" data-aos="fade-up">
+                    <div class="category-header">
+                        <h3>Bancos de Dados</h3>
+                        <div class="category-shape category-shape-5"></div>
+                    </div>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <span class="skill-name">PostgreSQL</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="90"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">SQLite</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="85"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-category" data-aos="fade-up">
+                    <div class="category-header">
+                        <h3>Game Development</h3>
+                        <div class="category-shape category-shape-6"></div>
+                    </div>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <span class="skill-name">Godot</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="85"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Unity (2D/3D)</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="80"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-category" data-aos="fade-up">
+                    <div class="category-header">
+                        <h3>IoT</h3>
+                        <div class="category-shape category-shape-7"></div>
+                    </div>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <span class="skill-name">ESP32</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="85"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">DHT22 / DS18B20</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="80"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="habilidades" class="section skills-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-number">03</span>
+                <h2 class="section-title">Habilidades & Tecnologias</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-category" data-aos="fade-up">
+                    <div class="category-header">
+                        <h3>Engenharia de Dados</h3>
+                        <div class="category-icon">📊</div>
+                    </div>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <span class="skill-name">Apache Spark</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="90"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Airflow</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="85"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">ETL/ELT</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="95"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Data Lakes</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="88"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-category" data-aos="fade-up">
+                    <div class="category-header">
+                        <h3>Cloud & Infraestrutura</h3>
+                        <div class="category-icon">☁️</div>
+                    </div>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <span class="skill-name">AWS</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="85"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Docker</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="80"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Kubernetes</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="75"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Terraform</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="70"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-category" data-aos="fade-up">
+                    <div class="category-header">
+                        <h3>Linguagens & Frameworks</h3>
+                        <div class="category-icon">💻</div>
+                    </div>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <span class="skill-name">Python</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="95"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">SQL</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="90"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Scala</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="75"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">JavaScript</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="80"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-category" data-aos="fade-up">
+                    <div class="category-header">
+                        <h3>Data Science & ML</h3>
+                        <div class="category-icon">🤖</div>
+                    </div>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <span class="skill-name">Pandas</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="90"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">TensorFlow</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="80"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Scikit-learn</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="85"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">PyTorch</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="75"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projetos" class="section projects-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-number">04</span>
+                <h2 class="section-title">Projetos em Destaque</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card" data-aos="fade-up">
+                    <div class="project-image">
+                        <div class="project-overlay">
+                            <a href="https://github.com/Boltzmann0" target="_blank" class="project-link">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" stroke="currentColor" stroke-width="2"/>
+                                    <polyline points="15 3 21 3 21 9" stroke="currentColor" stroke-width="2"/>
+                                    <line x1="10" y1="14" x2="21" y2="3" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                            </a>
+                        </div>
+                        <div class="project-icon">🤟</div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Exatas Libras</h3>
+                        <p>Projeto de divulgação científica em Libras para áreas de exatas, 
+                        promovendo acessibilidade e inclusão na educação.</p>
+                        <div class="project-tags">
+                            <span class="tag">Acessibilidade</span>
+                            <span class="tag">Educação</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card" data-aos="fade-up">
+                    <div class="project-image">
+                        <div class="project-overlay">
+                            <a href="https://github.com/Boltzmann0" target="_blank" class="project-link">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" stroke="currentColor" stroke-width="2"/>
+                                    <polyline points="15 3 21 3 21 9" stroke="currentColor" stroke-width="2"/>
+                                    <line x1="10" y1="14" x2="21" y2="3" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                            </a>
+                        </div>
+                        <div class="project-icon">🤖</div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Visão Computacional de Libras com IA</h3>
+                        <p>Sistema avançado de reconhecimento de Libras utilizando visão 
+                        computacional e inteligência artificial.</p>
+                        <div class="project-tags">
+                            <span class="tag">IA</span>
+                            <span class="tag">Visão Computacional</span>
+                            <span class="tag">Python</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card" data-aos="fade-up">
+                    <div class="project-image">
+                        <div class="project-overlay">
+                            <a href="https://github.com/lucaslopes-ti" target="_blank" class="project-link">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" stroke="currentColor" stroke-width="2"/>
+                                    <polyline points="15 3 21 3 21 9" stroke="currentColor" stroke-width="2"/>
+                                    <line x1="10" y1="14" x2="21" y2="3" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                            </a>
+                        </div>
+                        <div class="project-icon">📊</div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Análise de Dados com Python</h3>
+                        <p>Projetos de análise de grandes volumes de dados utilizando Pandas, 
+                        Matplotlib e outras bibliotecas de data science.</p>
+                        <div class="project-tags">
+                            <span class="tag">Python</span>
+                            <span class="tag">Pandas</span>
+                            <span class="tag">Data Analysis</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card" data-aos="fade-up">
+                    <div class="project-image">
+                        <div class="project-overlay">
+                            <a href="https://github.com/lucaslopes-ti" target="_blank" class="project-link">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" stroke="currentColor" stroke-width="2"/>
+                                    <polyline points="15 3 21 3 21 9" stroke="currentColor" stroke-width="2"/>
+                                    <line x1="10" y1="14" x2="21" y2="3" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                            </a>
+                        </div>
+                        <div class="project-icon">🤖</div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Machine Learning Aplicado</h3>
+                        <p>Modelos de machine learning para previsões e análises de dados, 
+                        incluindo algoritmos de classificação e regressão.</p>
+                        <div class="project-tags">
+                            <span class="tag">ML</span>
+                            <span class="tag">Scikit-learn</span>
+                            <span class="tag">TensorFlow</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card" data-aos="fade-up">
+                    <div class="project-image">
+                        <div class="project-overlay">
+                            <a href="https://github.com/lucaslopes-ti" target="_blank" class="project-link">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" stroke="currentColor" stroke-width="2"/>
+                                    <polyline points="15 3 21 3 21 9" stroke="currentColor" stroke-width="2"/>
+                                    <line x1="10" y1="14" x2="21" y2="3" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                            </a>
+                        </div>
+                        <div class="project-icon">🎮</div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Desenvolvimento de Jogos 2D</h3>
+                        <p>Jogos desenvolvidos utilizando Pygame, demonstrando habilidades 
+                        em programação de jogos e lógica de game design.</p>
+                        <div class="project-tags">
+                            <span class="tag">Pygame</span>
+                            <span class="tag">Python</span>
+                            <span class="tag">Game Dev</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card" data-aos="fade-up">
+                    <div class="project-image">
+                        <div class="project-overlay">
+                            <a href="https://github.com/lucaslopes-ti" target="_blank" class="project-link">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" stroke="currentColor" stroke-width="2"/>
+                                    <polyline points="15 3 21 3 21 9" stroke="currentColor" stroke-width="2"/>
+                                    <line x1="10" y1="14" x2="21" y2="3" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                            </a>
+                        </div>
+                        <div class="project-icon">♟️</div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Algoritmos para Xadrez</h3>
+                        <p>Implementação de IA para jogar xadrez utilizando algoritmos Minimax 
+                        e Alpha-Beta Pruning.</p>
+                        <div class="project-tags">
+                            <span class="tag">IA</span>
+                            <span class="tag">Algoritmos</span>
+                            <span class="tag">Python</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contato" class="section contact-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-number">05</span>
+                <h2 class="section-title">Entre em Contato</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Vamos conversar sobre dados?</h3>
+                    <p>Estou sempre aberto a discutir novos projetos, oportunidades de colaboração 
+                    ou apenas trocar ideias sobre engenharia de dados e tecnologia.</p>
+                    <div class="contact-links">
+                        <a href="https://github.com/lucaslopes-ti" target="_blank" class="contact-link">
+                            <div class="link-icon">🐙</div>
+                            <div class="link-info">
+                                <span class="link-label">GitHub</span>
+                                <span class="link-value">lucaslopes-ti</span>
+                            </div>
+                        </a>
+                        <a href="mailto:lucas.dalps@gmail.com" class="contact-link">
+                            <div class="link-icon">📧</div>
+                            <div class="link-info">
+                                <span class="link-label">Email</span>
+                                <span class="link-value">lucas.dalps@gmail.com</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="contact-form-wrapper">
+                    <form class="contact-form" id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Nome</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Mensagem</label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <span>Enviar Mensagem</span>
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M18 2L9 11M18 2L12 18L9 11M18 2L2 8L9 11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2025 Lucas Lopes. Todos os direitos reservados.</p>
+                <p class="footer-tagline">Transformando dados em soluções</p>
+            </div>
+        </div>
     </footer>
 
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="js/script.js"></script>
 </body>
 </html>
