@@ -71,37 +71,41 @@ window.addEventListener('resize', () => {
     }
 });
 
-// GSAP Scroll Animations
-gsap.registerPlugin(ScrollTrigger);
+// GSAP Scroll Animations - Will be initialized after libraries load
+function initGSAPAnimations() {
+    if (typeof gsap === 'undefined') return;
+    
+    // Fade in animations
+    gsap.utils.toArray('[data-aos]').forEach((element) => {
+        gsap.from(element, {
+            opacity: 0,
+            y: 50,
+            duration: 1,
+            scrollTrigger: {
+                trigger: element,
+                start: 'top 80%',
+                toggleActions: 'play none none none'
+            }
+        });
+    });
 
-// Fade in animations
-gsap.utils.toArray('[data-aos]').forEach((element) => {
-    gsap.from(element, {
-        opacity: 0,
-        y: 50,
-        duration: 1,
-        scrollTrigger: {
-            trigger: element,
-            start: 'top 80%',
-            toggleActions: 'play none none none'
+    // Skill bars animation (if they exist)
+    gsap.utils.toArray('.skill-progress').forEach((bar) => {
+        const width = bar.getAttribute('data-width');
+        if (width) {
+            gsap.to(bar, {
+                width: width + '%',
+                duration: 1.5,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: bar,
+                    start: 'top 80%',
+                    toggleActions: 'play none none none'
+                }
+            });
         }
     });
-});
-
-// Skill bars animation
-gsap.utils.toArray('.skill-progress').forEach((bar) => {
-    const width = bar.getAttribute('data-width');
-    gsap.to(bar, {
-        width: width + '%',
-        duration: 1.5,
-        ease: 'power2.out',
-        scrollTrigger: {
-            trigger: bar,
-            start: 'top 80%',
-            toggleActions: 'play none none none'
-        }
-    });
-});
+}
 
 // Stats counter animation removed - replaced with expertise tags
 
@@ -398,46 +402,108 @@ function initParallaxEffects() {
     }
 }
 
+// Wait for all libraries to load
+function waitForLibraries() {
+    return new Promise((resolve) => {
+        let attempts = 0;
+        const maxAttempts = 100; // 5 seconds max wait
+        
+        const checkLibraries = () => {
+            attempts++;
+            if (typeof THREE !== 'undefined' && typeof gsap !== 'undefined') {
+                resolve();
+            } else if (attempts < maxAttempts) {
+                setTimeout(checkLibraries, 50);
+            } else {
+                console.warn('Libraries did not load in time, continuing anyway...');
+                resolve(); // Continue even if libraries didn't load
+            }
+        };
+        checkLibraries();
+    });
+}
+
 // Initialize
-document.addEventListener('DOMContentLoaded', () => {
-    // Initialize 3D background
-    if (typeof THREE !== 'undefined') {
-        init3D();
-        initHero3D();
-    }
-    
-    // Initialize parallax
-    if (typeof gsap !== 'undefined') {
-        initParallaxEffects();
-    }
-    
-    // Animate hero labels
-    setTimeout(() => {
-        animateHeroLabels();
-    }, 1000);
-    
-    // Start typing effect
-    const typingElement = document.getElementById('typingText');
-    if (typingElement) {
-        setTimeout(() => {
-            typeWriter(typingElement, 'Lucas Lopes', 150);
-        }, 500);
-    }
-    
-    // Set initial scroll position
-    window.scrollTo(0, 0);
-    
-    // Resize handler for hero 3D
-    window.addEventListener('resize', () => {
-        if (heroCamera && heroRenderer) {
-            const canvas = document.getElementById('hero3d');
-            if (canvas) {
-                heroCamera.aspect = canvas.clientWidth / canvas.clientHeight;
-                heroCamera.updateProjectionMatrix();
-                heroRenderer.setSize(canvas.clientWidth, canvas.clientHeight);
+document.addEventListener('DOMContentLoaded', async () => {
+    try {
+        // Wait for libraries to load
+        await waitForLibraries();
+        
+        // Register GSAP plugin
+        if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+            gsap.registerPlugin(ScrollTrigger);
+        }
+        
+        // Initialize 3D background
+        if (typeof THREE !== 'undefined') {
+            try {
+                init3D();
+            } catch (error) {
+                console.warn('Error initializing 3D background:', error);
+            }
+            
+            try {
+                initHero3D();
+            } catch (error) {
+                console.warn('Error initializing hero 3D:', error);
             }
         }
-    });
+        
+        // Initialize parallax and GSAP animations
+        if (typeof gsap !== 'undefined') {
+            try {
+                initParallaxEffects();
+                initGSAPAnimations();
+            } catch (error) {
+                console.warn('Error initializing parallax/animations:', error);
+            }
+        }
+        
+        // Animate hero labels
+        setTimeout(() => {
+            try {
+                animateHeroLabels();
+            } catch (error) {
+                console.warn('Error animating hero labels:', error);
+            }
+        }, 1000);
+        
+        // Start typing effect
+        const typingElement = document.getElementById('typingText');
+        if (typingElement) {
+            setTimeout(() => {
+                try {
+                    typeWriter(typingElement, 'Lucas Lopes', 150);
+                } catch (error) {
+                    console.warn('Error in typing effect:', error);
+                }
+            }, 500);
+        }
+        
+        // Set initial scroll position
+        window.scrollTo(0, 0);
+        
+        // Resize handler for hero 3D
+        window.addEventListener('resize', () => {
+            if (heroCamera && heroRenderer) {
+                const canvas = document.getElementById('hero3d');
+                if (canvas) {
+                    heroCamera.aspect = canvas.clientWidth / canvas.clientHeight;
+                    heroCamera.updateProjectionMatrix();
+                    heroRenderer.setSize(canvas.clientWidth, canvas.clientHeight);
+                }
+            }
+            
+            // Also resize background canvas
+            if (camera && renderer) {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            }
+        });
+    } catch (error) {
+        console.error('Error during initialization:', error);
+    }
 });
 
 // Animate hero labels on load

@@ -434,13 +434,14 @@ body {
     50% { opacity: 1; transform: rotate(45deg) translateY(10px); }
 }
 
-/* Sections */
+/* Sections - Ensure visibility even without JS */
 .section {
     padding: 8rem 2rem;
     position: relative;
     opacity: 1 !important;
     visibility: visible !important;
     display: block !important;
+    min-height: 400px;
 }
 
 .container {
