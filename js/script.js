@@ -1,5 +1,6 @@
 // Three.js 3D Background
 let scene, camera, renderer, particles;
+let heroScene, heroCamera, heroRenderer, heroGeometry, heroMesh, heroParticles;
 
 function init3D() {
     scene = new THREE.Scene();
@@ -73,17 +74,6 @@ window.addEventListener('resize', () => {
 // GSAP Scroll Animations
 gsap.registerPlugin(ScrollTrigger);
 
-// Parallax effect for hero section
-gsap.to('.hero-content', {
-    y: -100,
-    scrollTrigger: {
-        trigger: '.hero-section',
-        start: 'top top',
-        end: 'bottom top',
-        scrub: 1
-    }
-});
-
 // Fade in animations
 gsap.utils.toArray('[data-aos]').forEach((element) => {
     gsap.from(element, {
@@ -113,29 +103,7 @@ gsap.utils.toArray('.skill-progress').forEach((bar) => {
     });
 });
 
-// Stats counter animation
-function animateCounter(element, target) {
-    let current = 0;
-    const increment = target / 100;
-    const timer = setInterval(() => {
-        current += increment;
-        if (current >= target) {
-            element.textContent = target;
-            clearInterval(timer);
-        } else {
-            element.textContent = Math.floor(current);
-        }
-    }, 20);
-}
-
-gsap.utils.toArray('.stat-number').forEach((stat) => {
-    const target = parseInt(stat.getAttribute('data-target'));
-    ScrollTrigger.create({
-        trigger: stat,
-        start: 'top 80%',
-        onEnter: () => animateCounter(stat, target)
-    });
-});
+// Stats counter animation removed - replaced with expertise tags
 
 // Typing effect
 function typeWriter(element, text, speed = 100) {
@@ -208,12 +176,245 @@ if (contactForm) {
     });
 }
 
+// Hero 3D Model - Mathematical/Physical Geometry
+function initHero3D() {
+    const canvas = document.getElementById('hero3d');
+    if (!canvas) return;
+    
+    heroScene = new THREE.Scene();
+    heroCamera = new THREE.PerspectiveCamera(50, canvas.clientWidth / canvas.clientHeight, 0.1, 1000);
+    heroRenderer = new THREE.WebGLRenderer({ 
+        canvas: canvas,
+        alpha: true,
+        antialias: true 
+    });
+    
+    heroRenderer.setSize(canvas.clientWidth, canvas.clientHeight);
+    heroRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    
+    // Create Torus Knot - Mathematical Geometry (Topology)
+    const geometry = new THREE.TorusKnotGeometry(2, 0.5, 100, 16);
+    const material = new THREE.MeshStandardMaterial({
+        color: 0x00d4ff,
+        emissive: 0x0066ff,
+        emissiveIntensity: 0.6,
+        metalness: 0.9,
+        roughness: 0.1,
+        transparent: true,
+        opacity: 0.85
+    });
+    
+    heroMesh = new THREE.Mesh(geometry, material);
+    heroScene.add(heroMesh);
+    
+    // Add wireframe for mathematical visualization (shows topology)
+    const wireframe = new THREE.WireframeGeometry(geometry);
+    const wireframeLine = new THREE.LineSegments(
+        wireframe,
+        new THREE.LineBasicMaterial({ 
+            color: 0x00d4ff, 
+            transparent: true, 
+            opacity: 0.4,
+            linewidth: 2
+        })
+    );
+    heroScene.add(wireframeLine);
+    
+    // Add mathematical sphere (representing physics - atomic model)
+    const sphereGeometry = new THREE.SphereGeometry(1.5, 32, 32);
+    const sphereMaterial = new THREE.MeshStandardMaterial({
+        color: 0xff0066,
+        emissive: 0xff3366,
+        emissiveIntensity: 0.4,
+        transparent: true,
+        opacity: 0.3,
+        wireframe: true
+    });
+    const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
+    sphere.position.set(0, 0, 0);
+    heroScene.add(sphere);
+    
+    // Add orbiting particles (representing physics)
+    const particleGeometry = new THREE.BufferGeometry();
+    const particleCount = 200;
+    const positions = new Float32Array(particleCount * 3);
+    
+    for (let i = 0; i < particleCount * 3; i += 3) {
+        const radius = 4 + Math.random() * 2;
+        const theta = (i / 3) * (Math.PI * 2 / particleCount);
+        const phi = Math.random() * Math.PI;
+        
+        positions[i] = radius * Math.sin(phi) * Math.cos(theta);
+        positions[i + 1] = radius * Math.sin(phi) * Math.sin(theta);
+        positions[i + 2] = radius * Math.cos(phi);
+    }
+    
+    particleGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    
+    const particleMaterial = new THREE.PointsMaterial({
+        color: 0xff0066,
+        size: 0.1,
+        transparent: true,
+        opacity: 0.8,
+        blending: THREE.AdditiveBlending
+    });
+    
+    heroParticles = new THREE.Points(particleGeometry, particleMaterial);
+    heroScene.add(heroParticles);
+    
+    // Add lights
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+    heroScene.add(ambientLight);
+    
+    const pointLight1 = new THREE.PointLight(0x00d4ff, 1, 100);
+    pointLight1.position.set(5, 5, 5);
+    heroScene.add(pointLight1);
+    
+    const pointLight2 = new THREE.PointLight(0xff0066, 1, 100);
+    pointLight2.position.set(-5, -5, -5);
+    heroScene.add(pointLight2);
+    
+    heroCamera.position.z = 8;
+    heroCamera.position.y = 2;
+    
+    animateHero3D();
+}
+
+function animateHero3D() {
+    requestAnimationFrame(animateHero3D);
+    
+    const time = Date.now() * 0.001;
+    
+    if (heroMesh) {
+        heroMesh.rotation.x += 0.005;
+        heroMesh.rotation.y += 0.01;
+        heroMesh.rotation.z += 0.002;
+        // Pulsing effect
+        heroMesh.scale.setScalar(1 + Math.sin(time) * 0.05);
+    }
+    
+    if (heroParticles) {
+        heroParticles.rotation.x += 0.002;
+        heroParticles.rotation.y += 0.003;
+        // Orbital motion
+        heroParticles.rotation.z += 0.001;
+    }
+    
+    // Animate sphere (physics model)
+    const sphere = heroScene.children.find(child => child.type === 'Mesh' && child.material.wireframe);
+    if (sphere) {
+        sphere.rotation.x += 0.003;
+        sphere.rotation.y += 0.005;
+        sphere.scale.setScalar(1 + Math.cos(time * 1.5) * 0.1);
+    }
+    
+    // Camera subtle movement for depth
+    if (heroCamera) {
+        heroCamera.position.x = Math.sin(time * 0.5) * 0.5;
+        heroCamera.position.y = 2 + Math.cos(time * 0.3) * 0.3;
+    }
+    
+    if (heroRenderer && heroScene && heroCamera) {
+        heroRenderer.render(heroScene, heroCamera);
+    }
+}
+
+// Advanced Parallax Effects
+function initParallaxEffects() {
+    // Hero text parallax with smooth easing
+    gsap.to('.hero-text', {
+        y: -100,
+        opacity: 0.3,
+        scrollTrigger: {
+            trigger: '.hero-section',
+            start: 'top top',
+            end: 'bottom top',
+            scrub: 1,
+            ease: 'power2.out'
+        }
+    });
+    
+    // 3D Model parallax with rotation
+    gsap.to('#hero3d', {
+        y: -200,
+        scale: 0.8,
+        scrollTrigger: {
+            trigger: '.hero-section',
+            start: 'top top',
+            end: 'bottom top',
+            scrub: 1.5,
+            ease: 'power1.inOut'
+        }
+    });
+    
+    // Hero labels parallax
+    gsap.utils.toArray('.hero-label').forEach((label, index) => {
+        gsap.to(label, {
+            y: -50 - (index * 10),
+            opacity: 0,
+            scrollTrigger: {
+                trigger: '.hero-section',
+                start: 'top top',
+                end: 'bottom top',
+                scrub: 1.2
+            }
+        });
+    });
+    
+    // Sections parallax with alternating directions
+    gsap.utils.toArray('.section').forEach((section, index) => {
+        const direction = index % 2 === 0 ? 1 : -1;
+        gsap.to(section, {
+            y: -80 * direction,
+            scrollTrigger: {
+                trigger: section,
+                start: 'top bottom',
+                end: 'bottom top',
+                scrub: 2.5,
+                ease: 'power1.inOut'
+            }
+        });
+    });
+    
+    // Project cards parallax
+    gsap.utils.toArray('.project-card').forEach((card, index) => {
+        gsap.from(card, {
+            y: 100,
+            opacity: 0,
+            scale: 0.9,
+            scrollTrigger: {
+                trigger: card,
+                start: 'top 85%',
+                end: 'top 50%',
+                scrub: 1,
+                ease: 'power2.out'
+            }
+        });
+    });
+    
+    // Smooth scroll enhancement
+    if (window.innerWidth > 768) {
+        document.documentElement.style.scrollBehavior = 'smooth';
+    }
+}
+
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize 3D background
     if (typeof THREE !== 'undefined') {
         init3D();
+        initHero3D();
     }
+    
+    // Initialize parallax
+    if (typeof gsap !== 'undefined') {
+        initParallaxEffects();
+    }
+    
+    // Animate hero labels
+    setTimeout(() => {
+        animateHeroLabels();
+    }, 1000);
     
     // Start typing effect
     const typingElement = document.getElementById('typingText');
@@ -225,16 +426,36 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Set initial scroll position
     window.scrollTo(0, 0);
-});
-
-// Parallax for floating cards
-window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
-    const cards = document.querySelectorAll('.floating-card');
     
-    cards.forEach((card, index) => {
-        const speed = 0.5 + (index * 0.1);
-        const yPos = -(scrolled * speed);
-        card.style.transform = `translateY(${yPos}px)`;
+    // Resize handler for hero 3D
+    window.addEventListener('resize', () => {
+        if (heroCamera && heroRenderer) {
+            const canvas = document.getElementById('hero3d');
+            if (canvas) {
+                heroCamera.aspect = canvas.clientWidth / canvas.clientHeight;
+                heroCamera.updateProjectionMatrix();
+                heroRenderer.setSize(canvas.clientWidth, canvas.clientHeight);
+            }
+        }
     });
 });
+
+// Animate hero labels on load
+function animateHeroLabels() {
+    const labels = document.querySelectorAll('.hero-label');
+    labels.forEach((label, index) => {
+        setTimeout(() => {
+            label.classList.add('visible');
+        }, index * 200);
+    });
+}
+
+// Update label positions based on 3D model
+function updateLabelPositions() {
+    // Labels will be positioned relative to 3D model
+    // This creates a connection between the 3D geometry and the labels
+    if (heroMesh && heroParticles) {
+        // Labels can follow the rotation or position of 3D elements
+        // This creates a dynamic, interactive feel
+    }
+}
