@@ -8,6 +8,21 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script>
+        // Force visibility immediately - before any libraries load
+        (function() {
+            document.addEventListener('DOMContentLoaded', function() {
+                // Force all sections to be visible
+                var sections = document.querySelectorAll('.section, .skills-section, .projects-section, .about-timeline, .timeline, [data-aos]');
+                sections.forEach(function(el) {
+                    el.style.opacity = '1';
+                    el.style.visibility = 'visible';
+                    el.style.display = el.classList.contains('projects-grid') || el.classList.contains('skills-modern-grid') ? 'grid' : 'block';
+                    el.style.transform = 'translateY(0)';
+                });
+            });
+        })();
+    </script>
 </head>
 <body>
     <!-- Background 3D Canvas -->

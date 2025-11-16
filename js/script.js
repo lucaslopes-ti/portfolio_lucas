@@ -402,11 +402,11 @@ function initParallaxEffects() {
     }
 }
 
-// Wait for all libraries to load
+// Wait for all libraries to load (with shorter timeout for faster fallback)
 function waitForLibraries() {
     return new Promise((resolve) => {
         let attempts = 0;
-        const maxAttempts = 100; // 5 seconds max wait
+        const maxAttempts = 40; // 2 seconds max wait - faster fallback
         
         const checkLibraries = () => {
             attempts++;
@@ -416,6 +416,13 @@ function waitForLibraries() {
                 setTimeout(checkLibraries, 50);
             } else {
                 console.warn('Libraries did not load in time, continuing anyway...');
+                // Force visibility of all sections
+                document.querySelectorAll('.section, .skills-section, .projects-section, .about-timeline, [data-aos]').forEach(el => {
+                    el.style.opacity = '1';
+                    el.style.visibility = 'visible';
+                    el.style.display = 'block';
+                    el.style.transform = 'translateY(0)';
+                });
                 resolve(); // Continue even if libraries didn't load
             }
         };

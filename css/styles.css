@@ -1050,8 +1050,9 @@ body {
 
 /* Animations */
 [data-aos] {
-    opacity: 1;
-    transform: translateY(0);
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    visibility: visible !important;
     transition: all 0.6s ease;
 }
 
@@ -1675,7 +1676,8 @@ body {
 }
 
 .projects-section,
-.skills-section {
+.skills-section,
+.about-timeline {
     opacity: 1 !important;
     visibility: visible !important;
     display: block !important;
@@ -1686,4 +1688,18 @@ body {
     opacity: 1 !important;
     visibility: visible !important;
     display: grid !important;
+}
+
+.timeline {
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
+}
+
+.timeline-item,
+.skill-tech-card,
+.project-card {
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
 }
