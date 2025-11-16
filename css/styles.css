@@ -273,6 +273,9 @@ body {
     will-change: transform;
     transform: translateZ(0);
     overflow: visible;
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
 }
 
 .hero-3d-labels {

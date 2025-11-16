@@ -73,18 +73,25 @@ window.addEventListener('resize', () => {
 
 // GSAP Scroll Animations - Will be initialized after libraries load
 function initGSAPAnimations() {
-    if (typeof gsap === 'undefined') return;
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
     
-    // Fade in animations
+    // Fade in animations (but keep elements visible after animation)
     gsap.utils.toArray('[data-aos]').forEach((element) => {
+        // Ensure element starts visible
+        gsap.set(element, { opacity: 1, y: 0, visibility: 'visible' });
+        
+        // Entrance animation
         gsap.from(element, {
-            opacity: 0,
-            y: 50,
-            duration: 1,
+            opacity: 0.3,
+            y: 30,
+            duration: 0.8,
             scrollTrigger: {
                 trigger: element,
-                start: 'top 80%',
-                toggleActions: 'play none none none'
+                start: 'top 85%',
+                toggleActions: 'play none none none',
+                onEnter: () => {
+                    gsap.set(element, { opacity: 1, y: 0, visibility: 'visible' });
+                }
             }
         });
     });
@@ -183,18 +190,28 @@ if (contactForm) {
 // Hero 3D Model - Mathematical/Physical Geometry
 function initHero3D() {
     const canvas = document.getElementById('hero3d');
-    if (!canvas) return;
+    if (!canvas) {
+        console.warn('Hero 3D canvas not found');
+        return;
+    }
     
-    heroScene = new THREE.Scene();
-    heroCamera = new THREE.PerspectiveCamera(50, canvas.clientWidth / canvas.clientHeight, 0.1, 1000);
-    heroRenderer = new THREE.WebGLRenderer({ 
-        canvas: canvas,
-        alpha: true,
-        antialias: true 
-    });
-    
-    heroRenderer.setSize(canvas.clientWidth, canvas.clientHeight);
-    heroRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    try {
+        heroScene = new THREE.Scene();
+        const width = canvas.clientWidth || 800;
+        const height = canvas.clientHeight || 600;
+        heroCamera = new THREE.PerspectiveCamera(50, width / height, 0.1, 1000);
+        heroRenderer = new THREE.WebGLRenderer({ 
+            canvas: canvas,
+            alpha: true,
+            antialias: true 
+        });
+        
+        heroRenderer.setSize(width, height);
+        heroRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        
+        // Ensure canvas is visible
+        canvas.style.opacity = '1';
+        canvas.style.visibility = 'visible';
     
     // Create Torus Knot - Mathematical Geometry (Topology)
     const geometry = new THREE.TorusKnotGeometry(2, 0.5, 100, 16);
@@ -282,6 +299,10 @@ function initHero3D() {
     heroCamera.position.y = 2;
     
     animateHero3D();
+    console.log('Hero 3D initialized successfully');
+    } catch (error) {
+        console.error('Error initializing hero 3D:', error);
+    }
 }
 
 function animateHero3D() {
@@ -325,10 +346,11 @@ function animateHero3D() {
 
 // Advanced Parallax Effects
 function initParallaxEffects() {
-    // Hero text parallax with smooth easing
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+    
+    // Hero text parallax with smooth easing (only movement, no opacity change)
     gsap.to('.hero-text', {
-        y: -100,
-        opacity: 0.3,
+        y: -50,
         scrollTrigger: {
             trigger: '.hero-section',
             start: 'top top',
@@ -338,10 +360,10 @@ function initParallaxEffects() {
         }
     });
     
-    // 3D Model parallax with rotation
+    // 3D Model parallax with rotation (only movement and scale, keep visible)
     gsap.to('#hero3d', {
-        y: -200,
-        scale: 0.8,
+        y: -100,
+        scale: 0.9,
         scrollTrigger: {
             trigger: '.hero-section',
             start: 'top top',
@@ -351,11 +373,10 @@ function initParallaxEffects() {
         }
     });
     
-    // Hero labels parallax
+    // Hero labels parallax (only movement, keep visible)
     gsap.utils.toArray('.hero-label').forEach((label, index) => {
         gsap.to(label, {
-            y: -50 - (index * 10),
-            opacity: 0,
+            y: -30 - (index * 5),
             scrollTrigger: {
                 trigger: '.hero-section',
                 start: 'top top',
@@ -365,11 +386,11 @@ function initParallaxEffects() {
         });
     });
     
-    // Sections parallax with alternating directions
+    // Sections parallax with alternating directions (only movement, keep visible)
     gsap.utils.toArray('.section').forEach((section, index) => {
         const direction = index % 2 === 0 ? 1 : -1;
         gsap.to(section, {
-            y: -80 * direction,
+            y: -30 * direction,
             scrollTrigger: {
                 trigger: section,
                 start: 'top bottom',
@@ -380,18 +401,25 @@ function initParallaxEffects() {
         });
     });
     
-    // Project cards parallax
+    // Project cards parallax (only entrance animation, keep visible after)
     gsap.utils.toArray('.project-card').forEach((card, index) => {
+        // Set initial state
+        gsap.set(card, { opacity: 1, y: 0, scale: 1 });
+        
+        // Entrance animation
         gsap.from(card, {
-            y: 100,
-            opacity: 0,
-            scale: 0.9,
+            y: 50,
+            opacity: 0.5,
+            scale: 0.95,
             scrollTrigger: {
                 trigger: card,
-                start: 'top 85%',
-                end: 'top 50%',
+                start: 'top 90%',
+                end: 'top 70%',
                 scrub: 1,
-                ease: 'power2.out'
+                ease: 'power2.out',
+                onEnter: () => {
+                    gsap.set(card, { opacity: 1, y: 0, scale: 1 });
+                }
             }
         });
     });
