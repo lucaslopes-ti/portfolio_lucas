@@ -1,6 +1,269 @@
 // Three.js 3D Background
 let scene, camera, renderer, particles;
-let heroScene, heroCamera, heroRenderer, heroGeometry, heroMesh, heroParticles;
+
+// Black Hole Component
+class BlackHole extends HTMLElement {
+  /**
+   * Init
+   */
+  connectedCallback() {
+    // Elements
+    this.canvas = this.querySelector(".js-canvas");
+    this.ctx = this.canvas.getContext("2d");
+
+    // Init
+    this.setSizes();
+    this.bindEvents();
+
+    // RAF
+    requestAnimationFrame(this.tick.bind(this));
+  }
+
+  /**
+   * Bind events
+   */
+  bindEvents() {
+    window.addEventListener("resize", this.onResize.bind(this));
+  }
+
+  /**
+   * Resize handler
+   */
+  onResize() {
+    this.setSizes();
+  }
+
+  /**
+   * Set sizes
+   */
+  setSizes() {
+    this.setCanvasSize();
+    this.setGraphics();
+  }
+  
+  /**
+   * Set canvas size
+   */
+  setCanvasSize() {
+    const rect = this.getBoundingClientRect();
+
+    this.render = {
+      width: rect.width,
+      hWidth: rect.width * 0.5,
+      height: rect.height,
+      hHeight: rect.height * 0.5,
+      dpi: window.devicePixelRatio || 1
+    };
+
+    this.canvas.width = this.render.width * this.render.dpi;
+    this.canvas.height = this.render.height * this.render.dpi;
+  }
+
+  /**
+   * Set graphics
+   */
+  setGraphics() {
+    this.setDiscs();
+    this.setDots();
+  }
+
+  /**
+   * Set discs
+   */
+  setDiscs() {
+    this.discs = [];
+
+    this.startDisc = {
+      x: this.render.width * 0.5,
+      y: this.render.height * 0,
+      w: this.render.width * 1,
+      h: this.render.height * 1
+    };
+
+    const totalDiscs = 150;
+
+    for (let i = 0; i < totalDiscs; i++) {
+      const p = i / totalDiscs;
+      const disc = this.tweenDisc({ p });
+      this.discs.push(disc);
+    }
+  }
+
+  /**
+   * Set dots
+   */
+  setDots() {
+    this.dots = [];
+    const totalDots = 20000;
+
+    for (let i = 0; i < totalDots; i++) {
+      const disc = this.discs[Math.floor(this.discs.length * Math.random())];
+      const dot = {
+        d: disc,
+        a: 0,
+        c: `rgb(${Math.random() * 0}, ${150 + Math.random() * 50}, ${150 + Math.random() * 105})`,
+        p: Math.random(),
+        o: Math.random()
+      };
+      this.dots.push(dot);
+    }
+  }
+
+  /**
+   * Tween disc
+   */
+  tweenDisc(disc) {
+    const { startDisc } = this;
+
+    const scaleX = this.tweenValue(1, 0, disc.p, 'outCubic');
+    const scaleY = this.tweenValue(1, 0, disc.p, 'outExpo');
+
+    disc.sx = scaleX;
+    disc.sy = scaleY;
+    disc.w = startDisc.w * scaleX;
+    disc.h = startDisc.h * scaleY;
+    disc.x = startDisc.x;
+    disc.y = startDisc.y + disc.p * startDisc.h * 1;
+
+    return disc;
+  }
+
+  /**
+   * Tween value
+   */
+  tweenValue(start, end, p, ease = false) {
+    const delta = end - start;
+    let easeFn;
+
+    if (ease === 'outCubic') {
+      easeFn = (t) => 1 - Math.pow(1 - t, 3);
+    } else if (ease === 'outExpo') {
+      easeFn = (t) => t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
+    } else if (ease === 'inExpo') {
+      easeFn = (t) => t === 0 ? 0 : Math.pow(2, 10 * (t - 1));
+    } else {
+      easeFn = (t) => t;
+    }
+
+    return start + delta * easeFn(p);
+  }
+  
+  /**
+   * Draw discs
+   */
+  drawDiscs() {
+    const { ctx } = this;
+
+    ctx.strokeStyle = '#0329';
+    ctx.lineWidth = 1;
+
+    // Discs
+    this.discs.forEach((disc) => {
+      const p = disc.sx * disc.sy;
+
+      ctx.beginPath();
+      ctx.globalAlpha = disc.a;
+
+      ctx.ellipse(
+        disc.x,
+        disc.y + disc.h,
+        disc.w,
+        disc.h,
+        0,
+        0,
+        Math.PI * 2
+      );
+      ctx.stroke();
+      ctx.closePath();
+    });
+  }
+
+  /**
+   * Draw dots
+   */
+  drawDots() {
+    const { ctx } = this;
+
+    this.dots.forEach((dot) => {
+      const { d, a, p, c, o } = dot;
+      
+      const _p = d.sx * d.sy;
+      ctx.fillStyle = c;
+
+      const newA = a + (Math.PI * 2 * p);
+      const x = d.x + Math.cos(newA) * d.w;
+      const y = d.y + Math.sin(newA) * d.h;
+
+      ctx.globalAlpha = d.a * o;
+
+      ctx.beginPath();
+      ctx.arc(x, y + d.h, 1 + _p * 0.5, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.closePath();
+    });
+  }
+
+  /**
+   * Move discs
+   */
+  moveDiscs() {
+    this.discs.forEach((disc) => {
+      disc.p = (disc.p + 0.0003) % 1;
+      
+      this.tweenDisc(disc);
+      
+      const p = disc.sx * disc.sy;
+
+      let a = 1;
+      if (p < 0.01) {
+        a = Math.pow(Math.min(p / 0.01, 1), 3);
+      } else if (p > 0.2) {
+        a = 1 - Math.min((p - 0.2) / 0.8, 1);
+      }
+      
+      disc.a = a;
+    });
+  }
+
+  /**
+   * Move dots
+   */
+  moveDots() {
+    this.dots.forEach((dot) => {
+      const v = this.tweenValue(0, 0.001, 1 - dot.d.sx * dot.d.sy, 'inExpo');
+      dot.p = (dot.p + v) % 1;
+    });
+  }
+  
+  /**
+   * Tick
+   */
+  tick(time) {
+    const { ctx } = this;
+
+    ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+    ctx.save();
+    ctx.scale(this.render.dpi, this.render.dpi);
+
+    // Move
+    this.moveDiscs();
+    this.moveDots();
+
+    // Draw
+    this.drawDiscs();
+    this.drawDots();
+
+    ctx.restore();
+
+    requestAnimationFrame(this.tick.bind(this));
+  }
+}
+
+// Register custom element
+if (!customElements.get('black-hole')) {
+  customElements.define("black-hole", BlackHole);
+}
 
 function init3D() {
     scene = new THREE.Scene();
@@ -187,162 +450,227 @@ if (contactForm) {
     });
 }
 
-// Hero 3D Model - Mathematical/Physical Geometry
-function initHero3D() {
-    const canvas = document.getElementById('hero3d');
-    if (!canvas) {
-        console.warn('Hero 3D canvas not found');
-        return;
-    }
+// Keypad Contact Form
+function initKeypadForm() {
+    const keypad = document.querySelector('.keypad');
+    const contactFormKeypad = document.getElementById('contactFormKeypad');
+    const keyOne = document.getElementById('key-one');
+    const keyTwo = document.getElementById('key-two');
+    const keyThree = document.getElementById('key-three');
     
-    try {
-        heroScene = new THREE.Scene();
-        const width = canvas.clientWidth || 800;
-        const height = canvas.clientHeight || 600;
-        heroCamera = new THREE.PerspectiveCamera(50, width / height, 0.1, 1000);
-        heroRenderer = new THREE.WebGLRenderer({ 
-            canvas: canvas,
-            alpha: true,
-            antialias: true 
+    if (!keypad || !contactFormKeypad) return;
+    
+    // Keypad configuration
+    const keyConfig = {
+        one: {
+            travel: 26,
+            text: 'ok',
+            key: 'o',
+            hue: 114,
+            saturation: 1.4,
+            brightness: 1.2,
+        },
+        two: {
+            travel: 26,
+            text: 'go',
+            key: 'g',
+            hue: 0,
+            saturation: 0,
+            brightness: 1.4,
+        },
+        three: {
+            travel: 18,
+            text: 'enviar.',
+            key: 'Enter',
+            hue: 0,
+            saturation: 0,
+            brightness: 0.4,
+        },
+    };
+    
+    // Click audio (optional)
+    const clickAudio = new Audio('https://cdn.freesound.org/previews/378/378085_6260145-lq.mp3');
+    clickAudio.muted = true; // Muted by default
+    
+    // Setup keys
+    function setupKey(keyElement, config, id) {
+        if (!keyElement) return;
+        
+        const textElement = keyElement.querySelector('.key__text');
+        if (textElement) {
+            textElement.innerText = config.text;
+        }
+        
+        keyElement.style.setProperty('--travel', config.travel);
+        keyElement.style.setProperty('--saturate', config.saturation);
+        keyElement.style.setProperty('--hue', config.hue);
+        keyElement.style.setProperty('--brightness', config.brightness);
+        
+        keyElement.addEventListener('pointerdown', () => {
+            keyElement.dataset.pressed = 'true';
+            if (!clickAudio.muted) {
+                clickAudio.currentTime = 0;
+                clickAudio.play().catch(() => {});
+            }
         });
         
-        heroRenderer.setSize(width, height);
-        heroRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        keyElement.addEventListener('pointerup', () => {
+            keyElement.dataset.pressed = 'false';
+        });
         
-        // Ensure canvas is visible
-        canvas.style.opacity = '1';
-        canvas.style.visibility = 'visible';
-    
-    // Create Torus Knot - Mathematical Geometry (Topology)
-    const geometry = new THREE.TorusKnotGeometry(2, 0.5, 100, 16);
-    const material = new THREE.MeshStandardMaterial({
-        color: 0x00d4ff,
-        emissive: 0x0066ff,
-        emissiveIntensity: 0.6,
-        metalness: 0.9,
-        roughness: 0.1,
-        transparent: true,
-        opacity: 0.85
-    });
-    
-    heroMesh = new THREE.Mesh(geometry, material);
-    heroScene.add(heroMesh);
-    
-    // Add wireframe for mathematical visualization (shows topology)
-    const wireframe = new THREE.WireframeGeometry(geometry);
-    const wireframeLine = new THREE.LineSegments(
-        wireframe,
-        new THREE.LineBasicMaterial({ 
-            color: 0x00d4ff, 
-            transparent: true, 
-            opacity: 0.4,
-            linewidth: 2
-        })
-    );
-    heroScene.add(wireframeLine);
-    
-    // Add mathematical sphere (representing physics - atomic model)
-    const sphereGeometry = new THREE.SphereGeometry(1.5, 32, 32);
-    const sphereMaterial = new THREE.MeshStandardMaterial({
-        color: 0xff0066,
-        emissive: 0xff3366,
-        emissiveIntensity: 0.4,
-        transparent: true,
-        opacity: 0.3,
-        wireframe: true
-    });
-    const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
-    sphere.position.set(0, 0, 0);
-    heroScene.add(sphere);
-    
-    // Add orbiting particles (representing physics)
-    const particleGeometry = new THREE.BufferGeometry();
-    const particleCount = 200;
-    const positions = new Float32Array(particleCount * 3);
-    
-    for (let i = 0; i < particleCount * 3; i += 3) {
-        const radius = 4 + Math.random() * 2;
-        const theta = (i / 3) * (Math.PI * 2 / particleCount);
-        const phi = Math.random() * Math.PI;
-        
-        positions[i] = radius * Math.sin(phi) * Math.cos(theta);
-        positions[i + 1] = radius * Math.sin(phi) * Math.sin(theta);
-        positions[i + 2] = radius * Math.cos(phi);
+        keyElement.addEventListener('pointerleave', () => {
+            keyElement.dataset.pressed = 'false';
+        });
     }
     
-    particleGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    // Setup all keys
+    if (keyOne) setupKey(keyOne, keyConfig.one, 'one');
+    if (keyTwo) setupKey(keyTwo, keyConfig.two, 'two');
+    if (keyThree) setupKey(keyThree, keyConfig.three, 'three');
     
-    const particleMaterial = new THREE.PointsMaterial({
-        color: 0xff0066,
-        size: 0.1,
-        transparent: true,
-        opacity: 0.8,
-        blending: THREE.AdditiveBlending
+    // Handle keyboard shortcuts
+    window.addEventListener('keydown', (event) => {
+        if (event.key === 'o' && keyOne) {
+            keyOne.dataset.pressed = 'true';
+            if (!clickAudio.muted) {
+                clickAudio.currentTime = 0;
+                clickAudio.play().catch(() => {});
+            }
+        }
+        if (event.key === 'g' && keyTwo) {
+            keyTwo.dataset.pressed = 'true';
+            if (!clickAudio.muted) {
+                clickAudio.currentTime = 0;
+                clickAudio.play().catch(() => {});
+            }
+        }
+        if (event.key === 'Enter' && keyThree) {
+            keyThree.dataset.pressed = 'true';
+            if (!clickAudio.muted) {
+                clickAudio.currentTime = 0;
+                clickAudio.play().catch(() => {});
+            }
+        }
     });
     
-    heroParticles = new THREE.Points(particleGeometry, particleMaterial);
-    heroScene.add(heroParticles);
+    window.addEventListener('keyup', (event) => {
+        if (event.key === 'o' && keyOne) keyOne.dataset.pressed = 'false';
+        if (event.key === 'g' && keyTwo) keyTwo.dataset.pressed = 'false';
+        if (event.key === 'Enter' && keyThree) keyThree.dataset.pressed = 'false';
+    });
     
-    // Add lights
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
-    heroScene.add(ambientLight);
-    
-    const pointLight1 = new THREE.PointLight(0x00d4ff, 1, 100);
-    pointLight1.position.set(5, 5, 5);
-    heroScene.add(pointLight1);
-    
-    const pointLight2 = new THREE.PointLight(0xff0066, 1, 100);
-    pointLight2.position.set(-5, -5, -5);
-    heroScene.add(pointLight2);
-    
-    heroCamera.position.z = 8;
-    heroCamera.position.y = 2;
-    
-    animateHero3D();
-    console.log('Hero 3D initialized successfully');
-    } catch (error) {
-        console.error('Error initializing hero 3D:', error);
+    // Form submission
+    if (contactFormKeypad) {
+        contactFormKeypad.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const formData = new FormData(contactFormKeypad);
+            const name = formData.get('name');
+            const email = formData.get('email');
+            const message = formData.get('message');
+            
+            // Here you would typically send the form data to a server
+            // For now, we'll show a success message
+            alert(`Obrigado, ${name}! Sua mensagem foi enviada. Entrarei em contato em breve.`);
+            contactFormKeypad.reset();
+            
+            // Trigger key three animation
+            if (keyThree) {
+                keyThree.dataset.pressed = 'true';
+                setTimeout(() => {
+                    keyThree.dataset.pressed = 'false';
+                }, 200);
+            }
+        });
     }
+    
+    // Show keypad with animation
+    setTimeout(() => {
+        if (keypad) {
+            keypad.style.setProperty('opacity', '1');
+            keypad.setAttribute('data-visible', 'true');
+        }
+    }, 500);
 }
 
-function animateHero3D() {
-    requestAnimationFrame(animateHero3D);
+// Interactive Cards Pointer Tracking
+function initInteractiveCardsTracking() {
+    const contactCards = document.querySelectorAll('.contact-card');
+    const projectCards = document.querySelectorAll('.project-card-new');
     
-    const time = Date.now() * 0.001;
+    // Set default CSS variables
+    document.documentElement.style.setProperty('--icon-saturate', '5');
+    document.documentElement.style.setProperty('--icon-brightness', '1.3');
+    document.documentElement.style.setProperty('--icon-scale', '3.4');
+    document.documentElement.style.setProperty('--icon-opacity', '0.25');
+    document.documentElement.style.setProperty('--border-width', '3');
+    document.documentElement.style.setProperty('--border-blur', '0');
+    document.documentElement.style.setProperty('--border-saturate', '4.2');
+    document.documentElement.style.setProperty('--border-brightness', '2.5');
+    document.documentElement.style.setProperty('--border-contrast', '2.5');
     
-    if (heroMesh) {
-        heroMesh.rotation.x += 0.005;
-        heroMesh.rotation.y += 0.01;
-        heroMesh.rotation.z += 0.002;
-        // Pulsing effect
-        heroMesh.scale.setScalar(1 + Math.sin(time) * 0.05);
+    // Update blur filters
+    const blurFilter = document.querySelector('filter#blur feGaussianBlur');
+    if (blurFilter) {
+        blurFilter.setAttribute('stdDeviation', '20');
     }
     
-    if (heroParticles) {
-        heroParticles.rotation.x += 0.002;
-        heroParticles.rotation.y += 0.003;
-        // Orbital motion
-        heroParticles.rotation.z += 0.001;
+    const blurFilterProjects = document.querySelector('filter#blur-projects feGaussianBlur');
+    if (blurFilterProjects) {
+        blurFilterProjects.setAttribute('stdDeviation', '20');
     }
     
-    // Animate sphere (physics model)
-    const sphere = heroScene.children.find(child => child.type === 'Mesh' && child.material.wireframe);
-    if (sphere) {
-        sphere.rotation.x += 0.003;
-        sphere.rotation.y += 0.005;
-        sphere.scale.setScalar(1 + Math.cos(time * 1.5) * 0.1);
+    // Function to update card pointer position
+    function updateCardPosition(card, event) {
+        const rect = card.getBoundingClientRect();
+        
+        // Calculate center point of the card
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        
+        // Calculate pointer position relative to center
+        const relativeX = event.clientX - centerX;
+        const relativeY = event.clientY - centerY;
+        
+        // Normalize to -1 to 1 range (at card edges)
+        const x = relativeX / (rect.width / 2);
+        const y = relativeY / (rect.height / 2);
+        
+        // Update CSS custom properties for each card
+        card.style.setProperty('--pointer-x', x.toFixed(3));
+        card.style.setProperty('--pointer-y', y.toFixed(3));
     }
     
-    // Camera subtle movement for depth
-    if (heroCamera) {
-        heroCamera.position.x = Math.sin(time * 0.5) * 0.5;
-        heroCamera.position.y = 2 + Math.cos(time * 0.3) * 0.3;
+    // Function to reset card position
+    function resetCardPosition(card) {
+        card.style.setProperty('--pointer-x', '-10');
+        card.style.setProperty('--pointer-y', '-10');
     }
     
-    if (heroRenderer && heroScene && heroCamera) {
-        heroRenderer.render(heroScene, heroCamera);
-    }
+    // Track pointer for contact cards
+    document.addEventListener('pointermove', (event) => {
+        contactCards.forEach((card) => {
+            updateCardPosition(card, event);
+        });
+        
+        projectCards.forEach((card) => {
+            updateCardPosition(card, event);
+        });
+    });
+    
+    // Reset position when pointer leaves
+    document.addEventListener('pointerleave', () => {
+        contactCards.forEach((card) => {
+            resetCardPosition(card);
+        });
+        
+        projectCards.forEach((card) => {
+            resetCardPosition(card);
+        });
+    });
 }
+
+// Hero 3D Model - Removed (replaced by Black Hole animation)
 
 // Advanced Parallax Effects
 function initParallaxEffects() {
@@ -360,18 +688,7 @@ function initParallaxEffects() {
         }
     });
     
-    // 3D Model parallax with rotation (only movement and scale, keep visible)
-    gsap.to('#hero3d', {
-        y: -100,
-        scale: 0.9,
-        scrollTrigger: {
-            trigger: '.hero-section',
-            start: 'top top',
-            end: 'bottom top',
-            scrub: 1.5,
-            ease: 'power1.inOut'
-        }
-    });
+    // Hero section parallax (removed hero3d reference)
     
     // Hero labels parallax (only movement, keep visible)
     gsap.utils.toArray('.hero-label').forEach((label, index) => {
@@ -477,11 +794,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 console.warn('Error initializing 3D background:', error);
             }
             
-            try {
-                initHero3D();
-            } catch (error) {
-                console.warn('Error initializing hero 3D:', error);
-            }
+            // Hero 3D removed - using Black Hole animation instead
         }
         
         // Initialize parallax and GSAP animations
@@ -494,14 +807,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
         }
         
-        // Animate hero labels
-        setTimeout(() => {
-            try {
-                animateHeroLabels();
-            } catch (error) {
-                console.warn('Error animating hero labels:', error);
-            }
-        }, 1000);
+        // Hero labels removed - using Black Hole animation instead
         
         // Start typing effect
         const typingElement = document.getElementById('typingText');
@@ -515,21 +821,26 @@ document.addEventListener('DOMContentLoaded', async () => {
             }, 500);
         }
         
+        // Initialize interactive cards tracking
+        try {
+            initInteractiveCardsTracking();
+        } catch (error) {
+            console.warn('Error initializing interactive cards tracking:', error);
+        }
+        
+        // Initialize keypad form
+        try {
+            initKeypadForm();
+        } catch (error) {
+            console.warn('Error initializing keypad form:', error);
+        }
+        
         // Set initial scroll position
         window.scrollTo(0, 0);
         
-        // Resize handler for hero 3D
+        // Resize handler for background canvas
         window.addEventListener('resize', () => {
-            if (heroCamera && heroRenderer) {
-                const canvas = document.getElementById('hero3d');
-                if (canvas) {
-                    heroCamera.aspect = canvas.clientWidth / canvas.clientHeight;
-                    heroCamera.updateProjectionMatrix();
-                    heroRenderer.setSize(canvas.clientWidth, canvas.clientHeight);
-                }
-            }
-            
-            // Also resize background canvas
+            // Resize background canvas
             if (camera && renderer) {
                 camera.aspect = window.innerWidth / window.innerHeight;
                 camera.updateProjectionMatrix();
@@ -541,22 +852,4 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 });
 
-// Animate hero labels on load
-function animateHeroLabels() {
-    const labels = document.querySelectorAll('.hero-label');
-    labels.forEach((label, index) => {
-        setTimeout(() => {
-            label.classList.add('visible');
-        }, index * 200);
-    });
-}
-
-// Update label positions based on 3D model
-function updateLabelPositions() {
-    // Labels will be positioned relative to 3D model
-    // This creates a connection between the 3D geometry and the labels
-    if (heroMesh && heroParticles) {
-        // Labels can follow the rotation or position of 3D elements
-        // This creates a dynamic, interactive feel
-    }
-}
+// Hero labels removed - using Black Hole animation instead

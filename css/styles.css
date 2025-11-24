@@ -155,17 +155,18 @@ body {
     justify-content: center;
     position: relative;
     padding: 8rem 2rem 10rem;
-    overflow-x: hidden;
-    overflow-y: visible;
+    overflow: hidden;
 }
 
 .hero-content {
     max-width: 1400px;
     width: 100%;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
+    display: flex;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
     z-index: 1;
 }
 
@@ -215,139 +216,138 @@ body {
     display: flex;
     gap: 1rem;
     flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
 }
 
-.btn {
+/* Glass Button Styles - Quantum Effect */
+.glass-btn {
+    position: relative;
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    padding: 1rem 2rem;
-    border-radius: 50px;
-    text-decoration: none;
+    padding: clamp(14px, 2.5vw, 16px) clamp(28px, 5vw, 32px);
+    font-size: clamp(15px, 2.5vw, 17px);
     font-weight: 600;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-    border: none;
+    color: #e0e0ff;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.03));
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: clamp(12px, 2vw, 15px);
+    backdrop-filter: blur(clamp(10px, 2vw, 12px));
+    -webkit-backdrop-filter: blur(clamp(10px, 2vw, 12px));
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
     cursor: pointer;
+    overflow: hidden;
+    text-transform: none;
+    letter-spacing: clamp(0.5px, 0.2vw, 1px);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    text-decoration: none;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
-.btn-primary {
-    background: var(--gradient-1);
-    color: var(--bg-dark);
-    box-shadow: var(--shadow-glow);
+.glass-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 255, 255, 0.3);
 }
 
-.btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 0 40px rgba(0, 212, 255, 0.5);
+.glass-btn svg {
+    width: 20px;
+    height: 20px;
+    transition: transform 0.3s ease;
 }
 
-.btn-secondary {
-    background: transparent;
-    color: var(--text-primary);
-    border: 2px solid var(--border-color);
+.glass-btn:hover svg {
+    transform: translateX(3px);
 }
 
-.btn-secondary:hover {
-    border-color: var(--primary-color);
-    background: rgba(0, 212, 255, 0.1);
+/* Button 7: Quantum Flicker */
+.btn-7:hover {
+    animation: quantumFlicker 0.8s ease-in-out infinite;
 }
 
-/* Hero 3D Visual */
-.hero-visual {
+@keyframes quantumFlicker {
+    0%, 100% { 
+        opacity: 1; 
+        box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+    }
+    50% { 
+        opacity: 0.8; 
+        box-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+    }
+}
+
+/* Apply Quantum style to all buttons */
+.btn,
+.btn-primary,
+.btn-secondary,
+button[type="submit"]:not(.key) {
     position: relative;
-    height: 650px;
-    min-height: 600px;
-    width: 100%;
-    overflow: visible;
-    padding-bottom: 2rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: clamp(14px, 2.5vw, 16px) clamp(28px, 5vw, 32px);
+    font-size: clamp(15px, 2.5vw, 17px);
+    font-weight: 600;
+    color: #e0e0ff;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.03));
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: clamp(12px, 2vw, 15px);
+    backdrop-filter: blur(clamp(10px, 2vw, 12px));
+    -webkit-backdrop-filter: blur(clamp(10px, 2vw, 12px));
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    overflow: hidden;
+    text-transform: none;
+    letter-spacing: clamp(0.5px, 0.2vw, 1px);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    text-decoration: none;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
-.hero-3d-canvas {
+.btn:hover,
+.btn-primary:hover,
+.btn-secondary:hover,
+button[type="submit"]:not(.key):hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 255, 255, 0.3);
+    animation: quantumFlicker 0.8s ease-in-out infinite;
+}
+
+.btn svg,
+.btn-primary svg,
+.btn-secondary svg,
+button[type="submit"]:not(.key) svg {
+    width: 20px;
+    height: 20px;
+    transition: transform 0.3s ease;
+}
+
+.btn:hover svg,
+.btn-primary:hover svg,
+.btn-secondary:hover svg,
+button[type="submit"]:not(.key):hover svg {
+    transform: translateX(3px);
+}
+
+/* Black Hole Background */
+black-hole {
     position: absolute;
     top: 0;
     left: 0;
+    margin: 0;
+    padding: 0;
     width: 100%;
     height: 100%;
-    z-index: 1;
-    will-change: transform;
-    transform: translateZ(0);
-    overflow: visible;
-    opacity: 1 !important;
-    visibility: visible !important;
-    display: block !important;
-}
-
-.hero-3d-labels {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 2;
+    overflow: hidden;
+    z-index: 0;
     pointer-events: none;
 }
 
-.hero-label {
-    position: absolute;
-    padding: 0.75rem 1.5rem;
-    background: rgba(10, 10, 15, 0.8);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(0, 212, 255, 0.3);
-    border-radius: 50px;
-    color: var(--primary-color);
-    font-size: 0.85rem;
-    font-weight: 600;
-    white-space: nowrap;
-    opacity: 0;
-    transform: translateY(20px) translateZ(0);
-    transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    pointer-events: auto;
-    cursor: pointer;
-    will-change: transform, opacity;
-}
-
-.hero-label:hover {
-    background: rgba(0, 212, 255, 0.1);
-    border-color: var(--primary-color);
-    box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
-    transform: translateY(0) scale(1.05);
-}
-
-.hero-label.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.label-1 {
-    top: 10%;
-    left: 10%;
-    animation: float-label 8s ease-in-out infinite;
-}
-
-.label-2 {
-    top: 20%;
-    right: 15%;
-    animation: float-label 7s ease-in-out infinite 1s;
-}
-
-.label-3 {
-    top: 50%;
-    left: 5%;
-    animation: float-label 9s ease-in-out infinite 0.5s;
-}
-
-.label-4 {
-    top: 60%;
-    right: 10%;
-    animation: float-label 8.5s ease-in-out infinite 1.5s;
-}
-
-.label-5 {
-    bottom: 25%;
-    left: 50%;
-    transform: translateX(-50%);
-    animation: float-label-center 7.5s ease-in-out infinite 2s;
+black-hole canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
 }
 
 .label-6 {
@@ -820,217 +820,613 @@ body {
 }
 
 .projects-section .section-header,
-.projects-section .projects-grid {
+.projects-section .projects-grid-new {
     position: relative;
     z-index: 1;
 }
 
-.projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+.projects-grid-new {
+    touch-action: none;
+    padding-block: 2rem;
+    width: 100%;
+    display: flex;
     gap: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
-.project-card {
+.project-card-new {
+    -webkit-tap-highlight-color: #0000;
+    width: 380px;
+    min-height: 320px;
+    outline: 2px solid var(--border-color);
     background: var(--bg-card);
-    border: 1px solid var(--border-color);
-    border-radius: 20px;
-    overflow: hidden;
-    transition: all 0.3s ease;
-}
-
-.project-card:hover {
-    transform: translateY(-10px);
-    border-color: var(--primary-color);
-    box-shadow: var(--shadow-glow);
-}
-
-.project-image {
-    height: 200px;
-    background: var(--bg-darker);
-    display: flex;
-    align-items: center;
-    justify-content: center;
     position: relative;
+    border-radius: 12px;
+    container-type: size;
+    cursor: pointer;
+    transition-property: translate, scale;
+    transition-duration: 0.12s;
+    transition-timing-function: cubic-bezier(.645, .045, .355, 1);
+}
+
+.project-card-new > div {
+    clip-path: inset(0 round 12px);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.4rem;
+    position: absolute;
+    inset: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    padding: 1.2rem;
+    box-sizing: border-box;
+}
+
+.project-card-new:active {
+    translate: 0 1px;
+    scale: 0.99;
+}
+
+.project-card-new::after {
+    content: '';
+    position: absolute;
+    pointer-events: none;
+    inset: 0px;
+    border-radius: inherit;
+    border: calc(var(--border-width, 3) * 1px) solid transparent;
+    backdrop-filter: blur(calc(var(--border-blur, 0) * 1px)) saturate(var(--border-saturate, 4.2)) brightness(var(--border-brightness, 2.5)) contrast(var(--border-contrast, 2.5));
+    mask: linear-gradient(#fff 0 100%) border-box, linear-gradient(#fff 0 100%) padding-box;
+    mask-composite: exclude;
+    z-index: 2;
+    clip-path: inset(0 round 12px);
+    transform: translateZ(0);
+}
+
+.project-card-new img,
+.project-card-new svg {
+    width: 70px;
+    height: 70px;
+    user-select: none;
+    filter: brightness(0) invert(1);
+    flex-shrink: 0;
+}
+
+.project-card-new img:nth-of-type(1),
+.project-card-new svg:nth-of-type(1) {
+    z-index: 2;
+    position: relative;
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+    flex-shrink: 0;
+}
+
+.project-card-new svg {
+    color: white;
+}
+
+.project-card-new .img-container {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    transform: translateZ(0);
+    filter: url(#blur-projects) saturate(var(--icon-saturate, 5)) brightness(var(--icon-brightness, 1.3));
+    translate: calc(var(--pointer-x, -10) * 50cqi) calc(var(--pointer-y, -10) * 50cqh);
+    scale: var(--icon-scale, 3.4);
+    opacity: var(--icon-opacity, 0.25);
+    will-change: transform, filter;
+    z-index: 0;
     overflow: hidden;
 }
 
-.project-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: all 0.4s ease;
-    filter: brightness(0.7) contrast(1.1);
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 0;
+.project-card-new .img-container img,
+.project-card-new .img-container svg {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
 }
 
-.project-card:hover .project-img {
-    transform: scale(1.1);
-    filter: brightness(0.9) contrast(1.2);
+.project-card-new .img-container svg {
+    color: white;
 }
 
-.project-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transition: opacity 0.3s ease;
+.project-card-new h2 {
+    z-index: 4;
+    position: relative;
+    font-size: 1.1rem;
+    margin: 0;
+    margin-top: 0.3rem;
+    user-select: none;
+    color: var(--text-primary);
+    text-align: center;
+    flex-shrink: 0;
+    line-height: 1.3;
 }
 
-.project-card:hover .project-overlay {
-    opacity: 1;
-}
-
-.project-link {
-    color: var(--primary-color);
-    width: 50px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(0, 212, 255, 0.1);
-    border-radius: 50%;
-    transition: all 0.3s ease;
-}
-
-.project-link:hover {
-    background: var(--primary-color);
-    color: var(--bg-dark);
-    transform: scale(1.1);
-}
-
-.project-icon {
-    font-size: 4rem;
-}
-
-.project-content {
-    padding: 2rem;
-}
-
-.project-content h3 {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-}
-
-.project-content p {
+.project-card-new p {
+    z-index: 4;
+    position: relative;
     color: var(--text-secondary);
-    line-height: 1.8;
-    margin-bottom: 1.5rem;
+    line-height: 1.4;
+    margin: 0.3rem 0;
+    font-size: 0.85rem;
+    text-align: center;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    max-height: 3.4em;
 }
 
-.project-tags {
+.project-card-new .project-tags {
+    z-index: 4;
+    position: relative;
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem;
+    gap: 0.4rem;
+    justify-content: center;
+    margin-top: 0.3rem;
+    flex-shrink: 0;
+}
+
+.project-card-link {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    text-decoration: none;
+}
+
+[data-exclude='true'] .project-card-new .img-container {
+    opacity: calc(var(--icon-opacity, 0.25) * 0.25);
+    transition: opacity 0.26s ease-out;
+}
+
+[data-exclude='true'] .project-card-new:is(:hover, :focus-within) .img-container {
+    opacity: var(--icon-opacity, 0.25);
 }
 
 /* Contact Section */
-.contact-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
+.contact-content-new {
     margin-top: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
 }
 
-.contact-info h3 {
+.contact-info-text {
+    text-align: center;
+    max-width: 600px;
+}
+
+.contact-info-text h3 {
     font-size: 2rem;
     margin-bottom: 1rem;
+    color: var(--text-primary);
 }
 
-.contact-info p {
+.contact-info-text p {
     color: var(--text-secondary);
     line-height: 1.8;
-    margin-bottom: 2rem;
 }
 
-.contact-links {
+.contact-cards-main {
+    touch-action: none;
+    padding-block: 2rem;
+    width: 100%;
+    max-width: 800px;
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.contact-card {
+    -webkit-tap-highlight-color: #0000;
+    width: 300px;
+    aspect-ratio: 4 / 3;
+    outline: 2px solid var(--border-color);
+    background: var(--bg-card);
+    position: relative;
+    border-radius: 12px;
+    container-type: size;
+    cursor: pointer;
+    transition-property: translate, scale;
+    transition-duration: 0.12s;
+    transition-timing-function: cubic-bezier(.645, .045, .355, 1);
+}
+
+.contact-card > div {
+    clip-path: inset(0 round 12px);
+    overflow: hidden;
+    align-content: center;
+    display: grid;
+    place-items: center;
+    gap: 0.5rem;
+    position: absolute;
+    inset: 0;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.contact-card:active {
+    translate: 0 1px;
+    scale: 0.99;
+}
+
+.contact-card::after {
+    content: '';
+    position: absolute;
+    pointer-events: none;
+    inset: 0px;
+    border-radius: inherit;
+    border: calc(var(--border-width, 3) * 1px) solid transparent;
+    backdrop-filter: blur(calc(var(--border-blur, 0) * 1px)) saturate(var(--border-saturate, 4.2)) brightness(var(--border-brightness, 2.5)) contrast(var(--border-contrast, 2.5));
+    mask: linear-gradient(#fff 0 100%) border-box, linear-gradient(#fff 0 100%) padding-box;
+    mask-composite: exclude;
+    z-index: 2;
+    clip-path: inset(0 round 12px);
+    transform: translateZ(0);
+}
+
+.contact-card img {
+    width: 100px;
+    user-select: none;
+    filter: brightness(0) invert(1);
+}
+
+.contact-card img:nth-of-type(1) {
+    z-index: 2;
+    position: relative;
+}
+
+.contact-card .img-container {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    transform: translateZ(0);
+    filter: url(#blur) saturate(var(--icon-saturate, 5)) brightness(var(--icon-brightness, 1.3));
+    translate: calc(var(--pointer-x, -10) * 50cqi) calc(var(--pointer-y, -10) * 50cqh);
+    scale: var(--icon-scale, 3.4);
+    opacity: var(--icon-opacity, 0.25);
+    will-change: transform, filter;
+}
+
+.contact-card .img-container img {
+    filter: brightness(0) invert(1);
+}
+
+.contact-card h2 {
+    z-index: 4;
+    position: relative;
+    font-size: 1rem;
+    margin: 0;
+    user-select: none;
+    color: var(--text-primary);
+}
+
+.contact-card-link {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    text-decoration: none;
+}
+
+[data-exclude='true'] .contact-card .img-container {
+    opacity: calc(var(--icon-opacity, 0.25) * 0.25);
+    transition: opacity 0.26s ease-out;
+}
+
+[data-exclude='true'] .contact-card:is(:hover, :focus-within) .img-container {
+    opacity: var(--icon-opacity, 0.25);
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* Contact Form with Keypad */
+.contact-form-section {
+    margin-top: 4rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3rem;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.contact-form-text {
+    flex: 1;
+    min-width: 300px;
+    max-width: 500px;
+}
+
+.contact-form-text h1 {
+    font-size: 2.5rem;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+}
+
+.contact-form-text p {
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+    opacity: 0.8;
+}
+
+.contact-form-keypad {
     display: flex;
     flex-direction: column;
     gap: 1rem;
 }
 
-.contact-link {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 1.5rem;
-    background: var(--bg-card);
-    border: 1px solid var(--border-color);
-    border-radius: 15px;
-    text-decoration: none;
-    color: var(--text-primary);
-    transition: all 0.3s ease;
-}
-
-.contact-link:hover {
-    transform: translateX(10px);
-    border-color: var(--primary-color);
-    box-shadow: var(--shadow-glow);
-}
-
-.link-icon {
-    font-size: 2rem;
-}
-
-.link-label {
-    display: block;
-    color: var(--text-secondary);
-    font-size: 0.85rem;
-    margin-bottom: 0.25rem;
-}
-
-.link-value {
-    display: block;
-    font-weight: 500;
-}
-
-.contact-form-wrapper {
-    background: var(--bg-card);
-    border: 1px solid var(--border-color);
-    border-radius: 20px;
-    padding: 2rem;
-}
-
-.form-group {
-    margin-bottom: 1.5rem;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 0.5rem;
-    color: var(--text-secondary);
-    font-weight: 500;
-    font-size: 0.9rem;
-}
-
-.form-group input,
-.form-group textarea {
+.contact-form-keypad input,
+.contact-form-keypad textarea {
     width: 100%;
-    padding: 1rem;
-    background: var(--bg-darker);
+    padding: 0.75rem 1rem;
+    background: var(--bg-card);
     border: 1px solid var(--border-color);
-    border-radius: 10px;
+    border-radius: 8px;
     color: var(--text-primary);
     font-family: inherit;
     font-size: 1rem;
     transition: all 0.3s ease;
 }
 
-.form-group input:focus,
-.form-group textarea:focus {
+.contact-form-keypad input:focus,
+.contact-form-keypad textarea:focus {
     outline: none;
     border-color: var(--primary-color);
     box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
+}
+
+.contact-form-keypad textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.contact-form-keypad button[type="submit"] {
+    position: relative;
+    padding: clamp(14px, 2.5vw, 16px) clamp(28px, 5vw, 32px);
+    border-radius: clamp(12px, 2vw, 15px);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.03));
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #e0e0ff;
+    font-weight: 600;
+    font-size: clamp(15px, 2.5vw, 17px);
+    cursor: pointer;
+    backdrop-filter: blur(clamp(10px, 2vw, 12px));
+    -webkit-backdrop-filter: blur(clamp(10px, 2vw, 12px));
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    text-transform: none;
+    letter-spacing: clamp(0.5px, 0.2vw, 1px);
+    overflow: hidden;
+}
+
+.contact-form-keypad button[type="submit"]:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 255, 255, 0.3);
+    animation: quantumFlicker 0.8s ease-in-out infinite;
+}
+
+/* Keypad Styles */
+.keypad {
+    position: relative;
+    aspect-ratio: 400 / 310;
+    display: flex;
+    place-items: center;
+    width: clamp(280px, 35vw, 400px);
+    -webkit-tap-highlight-color: #0000;
+    transition-property: translate, transform;
+    transition-duration: 0.26s;
+    transition-timing-function: ease-out;
+    transform-style: preserve-3d;
+    opacity: 0;
+}
+
+.keypad[data-visible="true"] {
+    opacity: 1;
+}
+
+.key {
+    transform-style: preserve-3d;
+    border: 0;
+    background: #0000;
+    padding: 0;
+    cursor: pointer;
+    outline: none;
+}
+
+.key[data-pressed='true'] .key__content,
+.key:active .key__content {
+    transform: translateY(calc(var(--travel, 26) * 1%));
+}
+
+.key__content {
+    width: 100%;
+    display: inline-block;
+    height: 100%;
+    transition: transform 0.12s ease-out;
+    container-type: inline-size;
+}
+
+.keypad__single .key__text {
+    width: 52%;
+    height: 62%;
+    transform: translate(45%, -16%);
+}
+
+.key__text {
+    height: 46%;
+    width: 86%;
+    position: absolute;
+    font-size: 12cqi;
+    z-index: 21;
+    top: 5%;
+    left: 0;
+    mix-blend-mode: normal;
+    color: hsl(0 0% 94%);
+    transform: translate(8%, 10%) rotateX(36deg) rotateY(45deg) rotateX(-90deg) rotate(0deg);
+    text-align: left;
+    padding: 1ch;
+    pointer-events: none;
+    font-weight: 600;
+}
+
+.keypad__single {
+    position: absolute;
+    width: 40.5%;
+    left: 54%;
+    bottom: 36%;
+    height: 46%;
+    clip-path: polygon(
+        0 0,
+        54% 0,
+        89% 24%,
+        100% 70%,
+        54% 100%,
+        46% 100%,
+        0 69%,
+        12% 23%,
+        47% 0%
+    );
+    -webkit-mask: url(https://assets.codepen.io/605876/keypad-single.png?format=auto&quality=86) 50% 50% / 100% 100% no-repeat;
+    mask: url(https://assets.codepen.io/605876/keypad-single.png?format=auto&quality=86) 50% 50% / 100% 100% no-repeat;
+    mask-mode: alpha;
+    -webkit-mask-mode: alpha;
+}
+
+.keypad__single--left {
+    left: 29.3%;
+    bottom: 54.2%;
+}
+
+.keypad__single .key__text {
+    font-size: 18cqi;
+}
+
+.key img {
+    top: 0;
+    opacity: 1;
+    width: 96%;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 1%);
+    filter: hue-rotate(calc(var(--hue, 0) * 1deg)) saturate(var(--saturate, 1)) brightness(var(--brightness, 1));
+    transition: transform 0.12s ease-out;
+    pointer-events: none;
+}
+
+.key__mask {
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+}
+
+.keypad__double {
+    position: absolute;
+    background: hsl(10 100% 50% / 0);
+    width: 64%;
+    height: 65%;
+    left: 6%;
+    bottom: 17.85%;
+    clip-path: polygon(
+        34% 0,
+        93% 44%,
+        101% 78%,
+        71% 100%,
+        66% 100%,
+        0 52%,
+        0 44%,
+        7% 17%,
+        30% 0
+    );
+    -webkit-mask: url(https://assets.codepen.io/605876/keypad-double.png?format=auto&quality=86) 50% 50% / 100% 100% no-repeat;
+    mask: url(https://assets.codepen.io/605876/keypad-double.png?format=auto&quality=86) 50% 50% / 100% 100% no-repeat;
+    mask-mode: alpha;
+    -webkit-mask-mode: alpha;
+}
+
+.keypad__double img {
+    top: 0;
+    opacity: 1;
+    width: 99%;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 1%);
+    pointer-events: none;
+}
+
+.keypad__base {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.keypad__base img {
+    transition: translate 0.12s ease-out;
+    width: 100%;
+}
+
+.key::after {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    opacity: 0;
+    inset: 0;
+    transition-property: opacity;
+    transition-duration: 0.26s;
+    transition-timing-function: ease-out;
+    background: repeating-linear-gradient(
+        -45deg,
+        #0000 0 5px,
+        hsl(220 100% 70%) 5px 6px
+    );
+}
+
+[data-exploded='true'] .key::after {
+    opacity: 1;
+    transition-delay: 0.52s;
+}
+
+@media (max-width: 768px) {
+    .contact-form-section {
+        flex-direction: column;
+    }
+    
+    .contact-form-text {
+        order: 2;
+        max-width: 100%;
+    }
+    
+    .keypad {
+        order: 1;
+    }
+    
+    .contact-form-text h1 {
+        font-size: 2rem;
+    }
 }
 
 /* Footer */

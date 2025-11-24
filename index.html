@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lucas Lopes - Engenheiro de Dados | Portfolio</title>
+    <title>Lucas Lopes - Engenheiro da Computação | Portfolio</title>
     <link rel="stylesheet" href="css/styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -52,11 +52,14 @@
 
     <!-- Hero Section -->
     <section id="home" class="hero-section">
+        <black-hole>
+            <canvas class="js-canvas"></canvas>
+        </black-hole>
         <div class="hero-content">
             <div class="hero-text">
                 <div class="hero-badge">
                     <div class="badge-dot"></div>
-                    <span>Engenheiro de Dados & Matemático</span>
+                    <span>Engenheiro da Computação & Matemático</span>
                 </div>
                 <h1 class="hero-title">
                     <span class="title-line">Olá, eu sou</span>
@@ -67,38 +70,15 @@
                     para criar soluções inovadoras que transformam dados em conhecimento e conhecimento em impacto real.
                 </p>
                 <div class="hero-buttons">
-                    <a href="#projetos" class="btn btn-primary">
+                    <a href="#projetos" class="glass-btn btn-7">
                         <span>Ver Projetos</span>
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                             <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </a>
-                    <a href="#contato" class="btn btn-secondary">
+                    <a href="#contato" class="glass-btn btn-7">
                         <span>Entre em Contato</span>
                     </a>
-                </div>
-            </div>
-            <div class="hero-visual">
-                <canvas id="hero3d" class="hero-3d-canvas"></canvas>
-                <div class="hero-3d-labels">
-                    <div class="hero-label label-1" data-label="Data Pipelines">
-                        <span>Data Pipelines</span>
-                    </div>
-                    <div class="hero-label label-2" data-label="Matemática">
-                        <span>Matemática</span>
-                    </div>
-                    <div class="hero-label label-3" data-label="Física">
-                        <span>Física</span>
-                    </div>
-                    <div class="hero-label label-4" data-label="Cloud Computing">
-                        <span>Cloud Computing</span>
-                    </div>
-                    <div class="hero-label label-5" data-label="ETL/ELT">
-                        <span>ETL/ELT</span>
-                    </div>
-                    <div class="hero-label label-6" data-label="Libras & Educação">
-                        <span>Libras & Educação</span>
-                    </div>
                 </div>
             </div>
         </div>
@@ -488,22 +468,14 @@
                 <h2 class="section-title">Projetos em Destaque</h2>
                 <div class="section-line"></div>
             </div>
-            <div class="projects-grid">
-                <div class="project-card" data-aos="fade-up">
-                    <div class="project-image">
-                        <div class="project-overlay">
-                            <a href="https://github.com/lucaslopes-ti/PBProject_Lucas" target="_blank" class="project-link">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" stroke="currentColor" stroke-width="2"/>
-                                    <polyline points="15 3 21 3 21 9" stroke="currentColor" stroke-width="2"/>
-                                    <line x1="10" y1="14" x2="21" y2="3" stroke="currentColor" stroke-width="2"/>
-                                </svg>
-                            </a>
+            <main class="projects-grid-new">
+                <article class="project-card-new" data-aos="fade-up">
+                    <div>
+                        <div class="img-container">
+                            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/python.svg" alt="Python" />
                         </div>
-                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80" alt="Data Science" class="project-img">
-                    </div>
-                    <div class="project-content">
-                        <h3>PBProject Lucas</h3>
+                        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/python.svg" alt="Python" />
+                        <h2>PBProject Lucas</h2>
                         <p>Projeto acadêmico desenvolvido durante o curso de Engenharia da Computação, 
                         envolvendo análise de dados, IoT, Machine Learning e visualização com Power BI.</p>
                         <div class="project-tags">
@@ -512,23 +484,16 @@
                             <span class="tag">IoT</span>
                             <span class="tag">Power BI</span>
                         </div>
+                        <a href="https://github.com/lucaslopes-ti/PBProject_Lucas" target="_blank" class="project-card-link"></a>
                     </div>
-                </div>
-                <div class="project-card" data-aos="fade-up">
-                    <div class="project-image">
-                        <div class="project-overlay">
-                            <a href="https://github.com/lucaslopes-ti/monitoramento_agua_vue" target="_blank" class="project-link">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" stroke="currentColor" stroke-width="2"/>
-                                    <polyline points="15 3 21 3 21 9" stroke="currentColor" stroke-width="2"/>
-                                    <line x1="10" y1="14" x2="21" y2="3" stroke="currentColor" stroke-width="2"/>
-                                </svg>
-                            </a>
+                </article>
+                <article class="project-card-new" data-aos="fade-up">
+                    <div>
+                        <div class="img-container">
+                            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/vuedotjs.svg" alt="Vue.js" />
                         </div>
-                        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=80" alt="IoT Water Monitoring" class="project-img">
-                    </div>
-                    <div class="project-content">
-                        <h3>Monitoramento de Água</h3>
+                        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/vuedotjs.svg" alt="Vue.js" />
+                        <h2>Monitoramento de Água</h2>
                         <p>Sistema de monitoramento de água desenvolvido com Vue.js, 
                         integrando IoT e visualização de dados em tempo real.</p>
                         <div class="project-tags">
@@ -536,46 +501,32 @@
                             <span class="tag">IoT</span>
                             <span class="tag">JavaScript</span>
                         </div>
+                        <a href="https://github.com/lucaslopes-ti/monitoramento_agua_vue" target="_blank" class="project-card-link"></a>
                     </div>
-                </div>
-                <div class="project-card" data-aos="fade-up">
-                    <div class="project-image">
-                        <div class="project-overlay">
-                            <a href="https://github.com/lucaslopes-ti/website_donizeticorretor" target="_blank" class="project-link">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" stroke="currentColor" stroke-width="2"/>
-                                    <polyline points="15 3 21 3 21 9" stroke="currentColor" stroke-width="2"/>
-                                    <line x1="10" y1="14" x2="21" y2="3" stroke="currentColor" stroke-width="2"/>
-                                </svg>
-                            </a>
+                </article>
+                <article class="project-card-new" data-aos="fade-up">
+                    <div>
+                        <div class="img-container">
+                            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/html5.svg" alt="HTML5" />
                         </div>
-                        <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80" alt="Real Estate Website" class="project-img">
-                    </div>
-                    <div class="project-content">
-                        <h3>Website Donizeti Corretor</h3>
+                        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/html5.svg" alt="HTML5" />
+                        <h2>Website Donizeti Corretor</h2>
                         <p>Site desenvolvido para corretor de imóveis, com design moderno e responsivo.</p>
                         <div class="project-tags">
                             <span class="tag">Web Development</span>
                             <span class="tag">HTML/CSS</span>
                             <span class="tag">JavaScript</span>
                         </div>
+                        <a href="https://github.com/lucaslopes-ti/website_donizeticorretor" target="_blank" class="project-card-link"></a>
                     </div>
-                </div>
-                <div class="project-card" data-aos="fade-up">
-                    <div class="project-image">
-                        <div class="project-overlay">
-                            <a href="https://github.com/lucaslopes-ti/website_SteamGameHub" target="_blank" class="project-link">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" stroke="currentColor" stroke-width="2"/>
-                                    <polyline points="15 3 21 3 21 9" stroke="currentColor" stroke-width="2"/>
-                                    <line x1="10" y1="14" x2="21" y2="3" stroke="currentColor" stroke-width="2"/>
-                                </svg>
-                            </a>
+                </article>
+                <article class="project-card-new" data-aos="fade-up">
+                    <div>
+                        <div class="img-container">
+                            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/steam.svg" alt="Steam" />
                         </div>
-                        <img src="https://images.unsplash.com/photo-1552820728-8b83bb6b773f?w=800&q=80" alt="Gaming Platform" class="project-img">
-                    </div>
-                    <div class="project-content">
-                        <h3>Steam Game Hub</h3>
+                        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/steam.svg" alt="Steam" />
+                        <h2>Steam Game Hub</h2>
                         <p>Plataforma web para visualização e análise de jogos da Steam, 
                         com integração de APIs e visualização de dados.</p>
                         <div class="project-tags">
@@ -583,23 +534,16 @@
                             <span class="tag">API Integration</span>
                             <span class="tag">Data Visualization</span>
                         </div>
+                        <a href="https://github.com/lucaslopes-ti/website_SteamGameHub" target="_blank" class="project-card-link"></a>
                     </div>
-                </div>
-                <div class="project-card" data-aos="fade-up">
-                    <div class="project-image">
-                        <div class="project-overlay">
-                            <a href="https://github.com/lucaslopes-ti/AudioRadar" target="_blank" class="project-link">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" stroke="currentColor" stroke-width="2"/>
-                                    <polyline points="15 3 21 3 21 9" stroke="currentColor" stroke-width="2"/>
-                                    <line x1="10" y1="14" x2="21" y2="3" stroke="currentColor" stroke-width="2"/>
-                                </svg>
-                            </a>
+                </article>
+                <article class="project-card-new" data-aos="fade-up">
+                    <div>
+                        <div class="img-container">
+                            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/soundcloud.svg" alt="Audio" />
                         </div>
-                        <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=800&q=80" alt="Audio Processing" class="project-img">
-                    </div>
-                    <div class="project-content">
-                        <h3>AudioRadar</h3>
+                        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/soundcloud.svg" alt="Audio" />
+                        <h2>AudioRadar</h2>
                         <p>Sistema de detecção e análise de áudio utilizando tecnologias modernas 
                         de processamento de sinal.</p>
                         <div class="project-tags">
@@ -607,46 +551,40 @@
                             <span class="tag">Python</span>
                             <span class="tag">Signal Processing</span>
                         </div>
+                        <a href="https://github.com/lucaslopes-ti/AudioRadar" target="_blank" class="project-card-link"></a>
                     </div>
-                </div>
-                <div class="project-card" data-aos="fade-up">
-                    <div class="project-image">
-                        <div class="project-overlay">
-                            <a href="https://github.com/lucaslopes-ti/BaoTamem" target="_blank" class="project-link">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" stroke="currentColor" stroke-width="2"/>
-                                    <polyline points="15 3 21 3 21 9" stroke="currentColor" stroke-width="2"/>
-                                    <line x1="10" y1="14" x2="21" y2="3" stroke="currentColor" stroke-width="2"/>
-                                </svg>
-                            </a>
+                </article>
+                <article class="project-card-new" data-aos="fade-up">
+                    <div>
+                        <div class="img-container">
+                            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/html5.svg" alt="HTML5" />
                         </div>
-                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80" alt="Full-Stack Development" class="project-img">
-                    </div>
-                    <div class="project-content">
-                        <h3>BaoTamem</h3>
+                        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/html5.svg" alt="HTML5" />
+                        <h2>BaoTamem</h2>
                         <p>Projeto inovador desenvolvido com tecnologias modernas, 
                         demonstrando habilidades em desenvolvimento full-stack.</p>
                         <div class="project-tags">
                             <span class="tag">Full-Stack</span>
                             <span class="tag">Web Development</span>
                         </div>
+                        <a href="https://github.com/lucaslopes-ti/BaoTamem" target="_blank" class="project-card-link"></a>
                     </div>
-                </div>
-                <div class="project-card" data-aos="fade-up">
-                    <div class="project-image">
-                        <div class="project-overlay">
-                            <a href="https://github.com/Boltzmann0" target="_blank" class="project-link">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" stroke="currentColor" stroke-width="2"/>
-                                    <polyline points="15 3 21 3 21 9" stroke="currentColor" stroke-width="2"/>
-                                    <line x1="10" y1="14" x2="21" y2="3" stroke="currentColor" stroke-width="2"/>
-                                </svg>
-                            </a>
+                </article>
+                <article class="project-card-new" data-aos="fade-up">
+                    <div>
+                        <div class="img-container">
+                            <svg width="70" height="70" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M8 7h8M8 11h8M8 15h4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
                         </div>
-                        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&q=80" alt="Education & Accessibility" class="project-img">
-                    </div>
-                    <div class="project-content">
-                        <h3>Exatas Libras</h3>
+                        <svg width="70" height="70" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M8 7h8M8 11h8M8 15h4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <h2>Exatas Libras</h2>
                         <p>Plataforma educacional que ensina disciplinas STEM em Libras, 
                         combinando Matemática, acessibilidade e tecnologia em um sistema 
                         de aprendizado interativo e inclusivo.</p>
@@ -658,9 +596,15 @@
                             <span class="tag">C#</span>
                             <span class="tag">AWS</span>
                         </div>
+                        <a href="https://github.com/Boltzmann0" target="_blank" class="project-card-link"></a>
                     </div>
-                </div>
-            </div>
+                </article>
+            </main>
+            <svg class="sr-only" style="overflow: visible !important;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <filter id="blur-projects" width="500%" height="500%">
+                    <feGaussianBlur in="SourceGraphic" stdDeviation="20" />
+                </filter>
+            </svg>
         </div>
     </section>
 
@@ -672,49 +616,86 @@
                 <h2 class="section-title">Entre em Contato</h2>
                 <div class="section-line"></div>
             </div>
-            <div class="contact-content">
-                <div class="contact-info">
+            <div class="contact-content-new">
+                <div class="contact-info-text">
                     <h3>Vamos conversar sobre dados?</h3>
                     <p>Estou sempre aberto a discutir novos projetos, oportunidades de colaboração 
                     ou apenas trocar ideias sobre engenharia de dados e tecnologia.</p>
-                    <div class="contact-links">
-                        <a href="https://github.com/lucaslopes-ti" target="_blank" class="contact-link">
-                            <div class="link-icon">🐙</div>
-                            <div class="link-info">
-                                <span class="link-label">GitHub</span>
-                                <span class="link-value">lucaslopes-ti</span>
-                            </div>
-                        </a>
-                        <a href="mailto:lucas.dalps@gmail.com" class="contact-link">
-                            <div class="link-icon">📧</div>
-                            <div class="link-info">
-                                <span class="link-label">Email</span>
-                                <span class="link-value">lucas.dalps@gmail.com</span>
-                            </div>
-                        </a>
-                    </div>
                 </div>
-                <div class="contact-form-wrapper">
-                    <form class="contact-form" id="contactForm">
-                        <div class="form-group">
-                            <label for="name">Nome</label>
-                            <input type="text" id="name" name="name" required>
+                <main class="contact-cards-main">
+                    <article class="contact-card">
+                        <div>
+                            <div class="img-container">
+                                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" alt="GitHub" />
+                            </div>
+                            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" alt="GitHub" />
+                            <h2>GitHub</h2>
+                            <a href="https://github.com/lucaslopes-ti" target="_blank" class="contact-card-link"></a>
                         </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email" required>
+                    </article>
+                    <article class="contact-card">
+                        <div>
+                            <div class="img-container">
+                                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/gmail.svg" alt="Email" />
+                            </div>
+                            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/gmail.svg" alt="Email" />
+                            <h2>Email</h2>
+                            <a href="mailto:lucas.dalps@gmail.com" class="contact-card-link"></a>
                         </div>
-                        <div class="form-group">
-                            <label for="message">Mensagem</label>
-                            <textarea id="message" name="message" rows="5" required></textarea>
+                    </article>
+                </main>
+                <svg class="sr-only" style="overflow: visible !important;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <filter id="blur" width="500%" height="500%">
+                        <feGaussianBlur in="SourceGraphic" stdDeviation="20" />
+                    </filter>
+                </svg>
+                
+                <!-- Contact Form with Keypad -->
+                <div class="contact-form-section">
+                    <section class="contact-form-text">
+                        <div>
+                            <h1>Vamos criar algo juntos?<br />Envie sua mensagem.</h1>
+                            <p>
+                                Estou sempre aberto a discutir novos projetos, oportunidades de colaboração 
+                                ou apenas trocar ideias sobre engenharia de dados e tecnologia.
+                            </p>
+                            <form id="contactFormKeypad" class="contact-form-keypad">
+                                <input type="text" name="name" required placeholder="Seu nome" />
+                                <input type="email" name="email" required placeholder="seu@email.com" />
+                                <textarea name="message" required placeholder="Sua mensagem..." rows="4"></textarea>
+                                <button type="submit" class="glass-btn btn-7">Enviar</button>
+                            </form>
                         </div>
-                        <button type="submit" class="btn btn-primary">
-                            <span>Enviar Mensagem</span>
-                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                <path d="M18 2L9 11M18 2L12 18L9 11M18 2L2 8L9 11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
+                    </section>
+                    <div class="keypad">
+                        <div class="keypad__base">
+                            <img src="https://assets.codepen.io/605876/keypad-base.png?format=auto&quality=86" alt="" />
+                        </div>
+                        <button id="key-one" class="key keypad__single keypad__single--left">
+                            <span class="key__mask">
+                                <span class="key__content">
+                                    <span class="key__text">ok</span>
+                                    <img src="https://assets.codepen.io/605876/keypad-single.png?format=auto&quality=86" alt="" />
+                                </span>
+                            </span>
                         </button>
-                    </form>
+                        <button id="key-two" class="key keypad__single">
+                            <span class="key__mask">
+                                <span class="key__content">
+                                    <span class="key__text">go</span>
+                                    <img src="https://assets.codepen.io/605876/keypad-single.png?format=auto&quality=86" alt="" />
+                                </span>
+                            </span>
+                        </button>
+                        <button id="key-three" class="key keypad__double" type="submit" form="contactFormKeypad">
+                            <span class="key__mask">
+                                <span class="key__content">
+                                    <span class="key__text">enviar.</span>
+                                    <img src="https://assets.codepen.io/605876/keypad-double.png?format=auto&quality=86" alt="" />
+                                </span>
+                            </span>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
