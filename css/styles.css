@@ -2102,3 +2102,98 @@ black-hole canvas {
     visibility: visible !important;
     display: block !important;
 }
+
+/* Text Shadow Effects */
+.elegantshadow {
+    display: inline-block;
+    color: #ffffff;
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.15) 0%, rgba(0, 102, 255, 0.15) 100%);
+    letter-spacing: .15em;
+    padding: 0.2em 0.4em;
+    border-radius: 4px;
+    font-weight: 600;
+    text-shadow: 
+      1px -1px 0 rgba(0, 212, 255, 0.3), 
+      -1px 2px 1px rgba(0, 212, 255, 0.25), 
+      -2px 4px 1px rgba(0, 212, 255, 0.2), 
+      -3px 6px 1px rgba(0, 212, 255, 0.15), 
+      -4px 8px 1px rgba(0, 212, 255, 0.1), 
+      -5px 10px 1px rgba(0, 212, 255, 0.08), 
+      -6px 12px 1px rgba(0, 212, 255, 0.06), 
+      -7px 14px 1px rgba(0, 212, 255, 0.05), 
+      -8px 16px 1px rgba(0, 212, 255, 0.04), 
+      -9px 18px 1px rgba(0, 212, 255, 0.03), 
+      -10px 20px 1px rgba(0, 212, 255, 0.02), 
+      -11px 22px 1px rgba(0, 212, 255, 0.02), 
+      -12px 24px 1px rgba(0, 212, 255, 0.01), 
+      -13px 26px 1px rgba(0, 212, 255, 0.01), 
+      -14px 28px 1px rgba(0, 212, 255, 0.01), 
+      -15px 30px 1px rgba(0, 212, 255, 0.01), 
+      -16px 32px 1px rgba(0, 212, 255, 0.01), 
+      -17px 34px 1px rgba(0, 212, 255, 0.01), 
+      -18px 36px 1px rgba(0, 212, 255, 0.01), 
+      -19px 38px 1px rgba(0, 212, 255, 0.01), 
+      -20px 40px 1px rgba(0, 212, 255, 0.01), 
+      -21px 42px 1px rgba(0, 212, 255, 0.01), 
+      -22px 44px 1px rgba(0, 212, 255, 0.01), 
+      -23px 46px 1px rgba(0, 212, 255, 0.01), 
+      -24px 48px 1px rgba(0, 212, 255, 0.01), 
+      -25px 50px 1px rgba(0, 212, 255, 0.01), 
+      -26px 52px 1px rgba(0, 212, 255, 0.01), 
+      -27px 54px 1px rgba(0, 212, 255, 0.01), 
+      -28px 56px 1px rgba(0, 212, 255, 0.01);
+}
+
+.deepshadow {
+    display: inline-block;
+    color: #e0dfdc;
+    background: linear-gradient(135deg, rgba(0, 102, 255, 0.2) 0%, rgba(0, 212, 255, 0.2) 100%);
+    letter-spacing: .1em;
+    padding: 0.2em 0.4em;
+    border-radius: 4px;
+    font-weight: 600;
+    text-shadow: 
+      0 -1px 0 rgba(255, 255, 255, 0.3), 
+      0 1px 0 rgba(0, 0, 0, 0.8), 
+      0 2px 0 rgba(0, 0, 0, 0.75), 
+      0 3px 0 rgba(0, 0, 0, 0.7), 
+      0 4px 0 rgba(0, 0, 0, 0.65), 
+      0 5px 0 rgba(0, 0, 0, 0.6), 
+      0 6px 0 rgba(0, 0, 0, 0.55), 
+      0 7px 0 rgba(0, 0, 0, 0.5), 
+      0 8px 0 rgba(0, 0, 0, 0.45), 
+      0 9px 0 rgba(0, 0, 0, 0.4), 
+      0 10px 0 rgba(0, 0, 0, 0.35), 
+      0 11px 0 rgba(0, 0, 0, 0.3), 
+      0 12px 0 rgba(0, 0, 0, 0.25), 
+      0 13px 0 rgba(0, 0, 0, 0.2), 
+      0 14px 0 rgba(0, 0, 0, 0.15), 
+      0 15px 0 rgba(0, 0, 0, 0.1), 
+      0 22px 30px rgba(0, 0, 0, 0.9);
+}
+
+.insetshadow {
+    display: inline-block;
+    color: #ffffff;
+    background: linear-gradient(135deg, rgba(255, 0, 102, 0.15) 0%, rgba(255, 51, 102, 0.15) 100%);
+    letter-spacing: .1em;
+    padding: 0.2em 0.4em;
+    border-radius: 4px;
+    font-weight: 600;
+    text-shadow: 
+      -1px -1px 1px rgba(0, 0, 0, 0.8), 
+      2px 2px 1px rgba(0, 212, 255, 0.4);
+}
+
+.retroshadow {
+    display: inline-block;
+    color: #ffffff;
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.2) 0%, rgba(0, 102, 255, 0.2) 100%);
+    letter-spacing: .05em;
+    padding: 0.2em 0.4em;
+    border-radius: 4px;
+    font-weight: 600;
+    text-shadow: 
+      4px 4px 0px rgba(0, 212, 255, 0.3), 
+      7px 7px 0px rgba(0, 0, 0, 0.5);
+}
